@@ -7,8 +7,8 @@ GameField::GameField(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->map_x = 40;
-    this->map_y = 20;
+    this->map_x = 10;
+    this->map_y = 8;
     this->turn = 60;
 }
 

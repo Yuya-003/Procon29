@@ -29,6 +29,10 @@ private slots:
 
     void on_num_turn_editingFinished();
 
+    void on_map_x_editingFinished();
+
+    void on_map_y_editingFinished();
+
 private:
     Ui::SettingDialog *ui;
 };

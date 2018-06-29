@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>218</width>
-    <height>97</height>
+    <width>227</width>
+    <height>103</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -67,6 +67,9 @@
            <property name="buttonSymbols">
             <enum>QAbstractSpinBox::NoButtons</enum>
            </property>
+           <property name="maximum">
+            <number>99</number>
+           </property>
           </widget>
          </item>
          <item>
@@ -95,6 +98,9 @@
            </property>
            <property name="keyboardTracking">
             <bool>true</bool>
+           </property>
+           <property name="maximum">
+            <number>99</number>
            </property>
           </widget>
          </item>
@@ -133,7 +139,7 @@
             <enum>Qt::Horizontal</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Preferred</enum>
+            <enum>QSizePolicy::Expanding</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
