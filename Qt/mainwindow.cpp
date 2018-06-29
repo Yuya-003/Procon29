@@ -6,6 +6,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    connect(ui->setting,SIGNAL(triggered()),this,SLOT(openSettingDialog()));
+}
+
+void MainWindow::openSettingDialog()
+{
+    SettingDialog *dialog = new SettingDialog();
+    dialog->exec();
+    delete dialog;
 }
 
 MainWindow::~MainWindow()
