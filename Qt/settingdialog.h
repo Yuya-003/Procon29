@@ -15,6 +15,20 @@ public:
     explicit SettingDialog(QWidget *parent = 0);
     ~SettingDialog();
 
+    void changeMapSize(int x, int y);
+    void changeTurn(int turn);
+
+signals:
+    void sendMapSize(int, int);
+    void sendTurn(int);
+
+private slots:
+    void on_ok_button_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_num_turn_editingFinished();
+
 private:
     Ui::SettingDialog *ui;
 };

@@ -26,13 +26,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    settingdialog.cpp
+    settingdialog.cpp \
+    gamefield.cpp
 
 HEADERS += \
         mainwindow.h \
-    settingdialog.h
+    settingdialog.h \
+    gamefield.h
 
 FORMS += \
         mainwindow.ui \
     settingdialog.ui \
-    settingdialog.ui
+    settingdialog.ui \
+    gamefield.ui
