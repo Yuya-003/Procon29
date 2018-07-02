@@ -30,6 +30,7 @@ void SettingDialog::on_ok_button_clicked()
 {
     emit sendMapSize(ui->map_x->value(), ui->map_y->value());
     emit sendTurn(ui->num_turn->value());
+    emit requestInit();
 
     this->close();
 }

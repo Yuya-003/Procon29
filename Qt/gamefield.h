@@ -2,6 +2,8 @@
 #define GAMEFIELD_H
 
 #include <QWidget>
+#include <QLabel>
+#include <QGridLayout>
 
 namespace Ui {
 class GameField;
@@ -18,9 +20,12 @@ public:
     int map_x, map_y;
     int turn;
 
+    QGridLayout *gridlayout;
+
 public slots:
     void changeMapSize(int x, int y);
     void changeTurn(int turn);
+    void initField();
 
 private:
     Ui::GameField *ui;

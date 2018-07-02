@@ -21,6 +21,7 @@ public:
 signals:
     void sendMapSize(int, int);
     void sendTurn(int);
+    void requestInit();
 
 private slots:
     void on_ok_button_clicked();

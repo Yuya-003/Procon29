@@ -18,6 +18,7 @@ void MainWindow::openSettingDialog()
 
     connect(dialog, SIGNAL(sendMapSize(int,int)), ui->gamefield, SLOT(changeMapSize(int,int)));
     connect(dialog, SIGNAL(sendTurn(int)), ui->gamefield, SLOT(changeTurn(int)));
+    connect(dialog, SIGNAL(requestInit()), ui->gamefield, SLOT(initField()));
 
     dialog->changeMapSize(ui->gamefield->map_x, ui->gamefield->map_y);
     dialog->changeTurn(ui->gamefield->turn);
