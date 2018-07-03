@@ -20,8 +20,6 @@ public:
     int map_x, map_y;
     int turn;
 
-    QGridLayout *gridlayout;
-
 public slots:
     void changeMapSize(int x, int y);
     void changeTurn(int turn);

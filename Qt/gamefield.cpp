@@ -11,7 +11,6 @@ GameField::GameField(QWidget *parent) :
     this->map_y = 8;
     this->turn = 60;
 
-    this->gridlayout = new QGridLayout(this);
     initField();
 }
 
@@ -22,12 +21,15 @@ GameField::~GameField()
 
 void GameField::initField()
 {
-    delete this->gridlayout;
-    this->gridlayout = new QGridLayout();
+    delete ui->widget;
+    ui->widget = new QWidget(this);
+    ui->horizontalLayout->addWidget(ui->widget);
+
+    QGridLayout *gridlayout = new QGridLayout(ui->widget);
     int count = 1;
     for(int i = 0; i < this->map_y; i++){
         for(int j = 0; j < this->map_x; j++){
-            QLabel *label = new QLabel(QString::number(count++));
+            QLabel *label = new QLabel(QString::number(count++), ui->widget);
             label->setFont(QFont("メイリオ", 20, QFont::Normal, false));
             label->setAlignment(Qt::AlignCenter);
             QPalette pal(label->palette());
@@ -38,7 +40,7 @@ void GameField::initField()
         }
     }
 
-    this->setLayout(gridlayout);
+    ui->widget->setLayout(gridlayout);
 }
 
 void GameField::changeMapSize(int x, int y)
