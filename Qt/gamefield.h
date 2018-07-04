@@ -5,6 +5,8 @@
 #include <QLabel>
 #include <QGridLayout>
 
+#include <random>
+
 namespace Ui {
 class GameField;
 }
@@ -19,6 +21,8 @@ public:
 
     int map_x, map_y;
     int turn;
+
+    std::mt19937 mt;
 
 public slots:
     void changeMapSize(int x, int y);

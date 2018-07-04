@@ -7,6 +7,8 @@ GameField::GameField(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    mt.seed(std::random_device()());
+
     this->map_x = 10;
     this->map_y = 8;
     this->turn = 60;
@@ -21,26 +23,35 @@ GameField::~GameField()
 
 void GameField::initField()
 {
-    delete ui->widget;
-    ui->widget = new QWidget(this);
-    ui->horizontalLayout->addWidget(ui->widget);
+    delete ui->frame;
+    ui->frame = new QFrame(this);
+    ui->horizontalLayout->addWidget(ui->frame);
 
-    QGridLayout *gridlayout = new QGridLayout(ui->widget);
-    int count = 1;
+    QGridLayout *gridlayout = new QGridLayout(ui->frame);
+    gridlayout->setSpacing(0);
+    gridlayout->setMargin(0);
+
+    std::uniform_int_distribution<> rnd(1, 16);
+
     for(int i = 0; i < this->map_y; i++){
         for(int j = 0; j < this->map_x; j++){
-            QLabel *label = new QLabel(QString::number(count++), ui->widget);
+            QLabel *label = new QLabel(QString::number(rnd(mt)), ui->frame);
             label->setFont(QFont("メイリオ", 20, QFont::Normal, false));
+            label->setFrameShape(QFrame::Box);
+            label->setMinimumSize(50,50);
             label->setAlignment(Qt::AlignCenter);
+
             QPalette pal(label->palette());
             pal.setColor(QPalette::Background, Qt::white);
             label->setAutoFillBackground(true);
             label->setPalette(pal);
+
             gridlayout->addWidget(label, i, j);
         }
     }
 
-    ui->widget->setLayout(gridlayout);
+    ui->frame->setLayout(gridlayout);
+    ui->frame->setFrameShape(QFrame::Box);
 }
 
 void GameField::changeMapSize(int x, int y)
