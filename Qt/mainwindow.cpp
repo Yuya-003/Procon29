@@ -32,3 +32,13 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_reset_button_clicked()
+{
+
+}
+
+void MainWindow::on_shuffle_button_clicked()
+{
+    ui->gamefield->initField();
+}
