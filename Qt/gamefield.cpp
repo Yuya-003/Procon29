@@ -35,18 +35,8 @@ void GameField::initField()
 
     for(int i = 0; i < this->map_y; i++){
         for(int j = 0; j < this->map_x; j++){
-            QLabel *label = new QLabel(QString::number(rnd(mt)), ui->frame);
-            label->setFont(QFont("メイリオ", 20, QFont::Normal, false));
-            label->setFrameShape(QFrame::Box);
-            label->setMinimumSize(50,50);
-            label->setAlignment(Qt::AlignCenter);
-
-            QPalette pal(label->palette());
-            pal.setColor(QPalette::Background, Qt::white);
-            label->setAutoFillBackground(true);
-            label->setPalette(pal);
-
-            gridlayout->addWidget(label, i, j);
+            Cell *cell = new Cell(QString::number(rnd(mt)), ui->frame);
+            gridlayout->addWidget(cell, i, j);
         }
     }
 

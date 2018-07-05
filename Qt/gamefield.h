@@ -1,6 +1,8 @@
 #ifndef GAMEFIELD_H
 #define GAMEFIELD_H
 
+#include "cell.h"
+
 #include <QWidget>
 #include <QLabel>
 #include <QGridLayout>
