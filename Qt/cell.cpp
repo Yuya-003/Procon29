@@ -16,12 +16,13 @@ Cell::Cell(QWidget *parent) :
     pal.setColor(QPalette::Background, Qt::white);
     ui->label->setAutoFillBackground(true);
     ui->label->setPalette(pal);
+
 }
 
-Cell::Cell(const QString &text, QWidget *parent) :
+Cell::Cell(int point_, QWidget *parent) :
     Cell(parent)
 {
-    ui->label->setText(text);
+    ui->label->setText(QString::number(point = point_));
 }
 
 Cell::~Cell()

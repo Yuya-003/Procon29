@@ -8,6 +8,7 @@
 #include <QGridLayout>
 
 #include <random>
+#include <vector>
 
 namespace Ui {
 class GameField;
@@ -23,6 +24,8 @@ public:
 
     int map_x, map_y;
     int turn;
+
+    std::vector<std::vector<Cell*>> field;
 
     std::mt19937 mt;
 

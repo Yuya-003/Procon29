@@ -35,7 +35,7 @@ void GameField::initField()
 
     for(int i = 0; i < this->map_y; i++){
         for(int j = 0; j < this->map_x; j++){
-            Cell *cell = new Cell(QString::number(rnd(mt)), ui->frame);
+            Cell *cell = new Cell(rnd(mt), ui->frame);
             gridlayout->addWidget(cell, i, j);
         }
     }

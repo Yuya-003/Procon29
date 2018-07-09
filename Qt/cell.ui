@@ -39,6 +39,9 @@
        <kerning>true</kerning>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="mouseTracking">
       <bool>false</bool>
      </property>

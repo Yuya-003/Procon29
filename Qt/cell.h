@@ -13,8 +13,15 @@ class Cell : public QWidget
 
 public:
     explicit Cell(QWidget *parent = 0);
-    explicit Cell(const QString &text, QWidget *parent = 0);
+    explicit Cell(int point_, QWidget *parent = 0);
     ~Cell();
+
+    enum Status{
+        none, pl1, pl2, area1, area2
+    };
+
+    int point = 0;
+    Status status = none;
 
 private:
     Ui::Cell *ui;
