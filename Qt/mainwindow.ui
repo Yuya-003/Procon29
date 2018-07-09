@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_4">
     <item>
-     <widget class="GameField" name="gamefield" native="true"/>
+     <widget class="GameField" name="gamefield"/>
     </item>
     <item>
      <spacer name="horizontalSpacer">
@@ -220,8 +220,8 @@
  <customwidgets>
   <customwidget>
    <class>GameField</class>
-   <extends>QWidget</extends>
-   <header location="global">gamefield.h</header>
+   <extends>QFrame</extends>
+   <header>gamefield.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

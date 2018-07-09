@@ -2,7 +2,7 @@
 #include "ui_gamefield.h"
 
 GameField::GameField(QWidget *parent) :
-    QWidget(parent),
+    QFrame(parent),
     ui(new Ui::GameField)
 {
     ui->setupUi(this);
@@ -13,6 +13,9 @@ GameField::GameField(QWidget *parent) :
     this->map_y = 8;
     this->turn = 60;
 
+    this->grid = new QGridLayout(this);
+    this->grid->setSpacing(0);
+    this->grid->setMargin(0);
     initField();
 }
 
@@ -23,25 +26,27 @@ GameField::~GameField()
 
 void GameField::initField()
 {
-    delete ui->frame;
-    ui->frame = new QFrame(this);
-    ui->horizontalLayout->addWidget(ui->frame);
-
-    QGridLayout *gridlayout = new QGridLayout(ui->frame);
-    gridlayout->setSpacing(0);
-    gridlayout->setMargin(0);
+    for(auto row:this->field){
+        for(auto cell:row){
+            this->grid->removeWidget(cell);
+            delete cell;
+        }
+    }
+    this->field.clear();
 
     std::uniform_int_distribution<> rnd(1, 16);
 
     for(int i = 0; i < this->map_y; i++){
+        std::vector<Cell*> row;
         for(int j = 0; j < this->map_x; j++){
-            Cell *cell = new Cell(rnd(mt), ui->frame);
-            gridlayout->addWidget(cell, i, j);
+            Cell *cell = new Cell(rnd(mt), this);
+            this->grid->addWidget(cell, i, j);
+            row.push_back(cell);
         }
+        this->field.push_back(row);
     }
 
-    ui->frame->setLayout(gridlayout);
-    ui->frame->setFrameShape(QFrame::Box);
+    this->field.shrink_to_fit();
 }
 
 void GameField::changeMapSize(int x, int y)

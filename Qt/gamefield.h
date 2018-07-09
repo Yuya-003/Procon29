@@ -3,7 +3,7 @@
 
 #include "cell.h"
 
-#include <QWidget>
+#include <QFrame>
 #include <QLabel>
 #include <QGridLayout>
 
@@ -14,7 +14,7 @@ namespace Ui {
 class GameField;
 }
 
-class GameField : public QWidget
+class GameField : public QFrame
 {
     Q_OBJECT
 
@@ -22,10 +22,13 @@ public:
     explicit GameField(QWidget *parent = 0);
     ~GameField();
 
+    using Field = std::vector<std::vector<Cell*>>;
+
     int map_x, map_y;
     int turn;
 
-    std::vector<std::vector<Cell*>> field;
+    Field field;
+    QGridLayout *grid;
 
     std::mt19937 mt;
 

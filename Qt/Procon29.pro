@@ -27,18 +27,18 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     settingdialog.cpp \
-    gamefield.cpp \
-    cell.cpp
+    cell.cpp \
+    gamefield.cpp
 
 HEADERS += \
         mainwindow.h \
     settingdialog.h \
-    gamefield.h \
-    cell.h
+    cell.h \
+    gamefield.h
 
 FORMS += \
         mainwindow.ui \
     settingdialog.ui \
     settingdialog.ui \
-    gamefield.ui \
-    cell.ui
+    cell.ui \
+    gamefield.ui
