@@ -1,0 +1,7 @@
+QR/Procon_QR.sln
+*.vcxproj
+*.filters
+*.user
+QR/.vs/*
+QR/App/*
+QR/Intermediate/*
