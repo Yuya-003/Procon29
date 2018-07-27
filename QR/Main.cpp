@@ -22,6 +22,8 @@ void Main()
 
 	std::string str;
 
+	bool checkOutput = false;
+
 	while (System::Update())
 	{
 		if (webcam.hasNewFrame())
@@ -45,17 +47,27 @@ void Main()
 				Print << U"No text";
 			}
 
-			if (!str.empty()) 
-				String wStr(str);
-				if (KeyEnter.down()) {
+			Print << U"";
+			if (!str.empty()) {
+				String wStr = Unicode::Widen(str);
+				Print << wStr;
+			}
+			if (KeyEnter.pressed())Print << U"Enter Pressed";
+			if (KeyEnter.pressed() && !checkOutput) {
+				if (!str.empty()) {
 					outputfile << str;
+					outputfile.close();
+					checkOutput = true;
 					Print << U"Output";
 				}
 			}
 
-			texture.fill(image);
+			if (checkOutput) {
+				Print << U"Output End";
+			}
 		}
 
+		texture.fill(image);
 
 		texture.draw();
 	}
