@@ -2,6 +2,37 @@
 #include <fstream>
 #include <string>
 
+class QRInfo {
+private:
+	std::string qrInfo;
+	bool checkOutput = false;
+public:
+	void SetQRContent(std::string set) {
+		qrInfo = set;
+	}
+
+	std::string GetQRContent() {
+		return qrInfo;
+	}
+
+	void OutputQRContent() {
+		std::ofstream outputFile("test.txt");
+
+		if (KeyEnter.pressed() && !checkOutput) {
+			if (!qrInfo.empty()) {
+				outputFile << qrInfo;
+				outputFile.close();
+				checkOutput = true;
+				Print << U"Output";
+			}
+		}
+
+		if (checkOutput) {
+			Print << U"Output End";
+		}
+	}
+};
+
 void Main()
 {
 	Window::Resize(1280, 720);
@@ -9,66 +40,42 @@ void Main()
 	Webcam webcam(0);
 
 	webcam.setResolution(1280, 720);
-
 	webcam.start();
 
 	Image image;
-
 	DynamicTexture texture;
-
 	QRDecoder qrDecoder;
+	QRInfo qr;
 
-	std::ofstream outputfile("test.txt");
-
-	std::string str;
-
-	bool checkOutput = false;
 
 	while (System::Update())
 	{
 		if (webcam.hasNewFrame())
 		{
 			ClearPrint();
-
 			webcam.getFrame(image);
 
 			QRContent contents;
 
 			qrDecoder.decode(image, contents);
-
 			contents.quad.overwriteFrame(image, 6, Palette::Red);
 
 			if (contents.text)
 			{
 				Print << contents.text;
-				str = contents.text.narrow();
+				qr.SetQRContent(contents.text.narrow());
 			}
 			else {
 				Print << U"No text";
 			}
 
 			Print << U"";
-			if (!str.empty()) {
-				String wStr = Unicode::Widen(str);
-				Print << wStr;
-			}
-			if (KeyEnter.pressed())Print << U"Enter Pressed";
-			if (KeyEnter.pressed() && !checkOutput) {
-				if (!str.empty()) {
-					outputfile << str;
-					outputfile.close();
-					checkOutput = true;
-					Print << U"Output";
-				}
-			}
+			Print << Unicode::Widen(qr.GetQRContent());
 
-			if (checkOutput) {
-				Print << U"Output End";
-			}
+			qr.OutputQRContent();
 		}
 
 		texture.fill(image);
-
 		texture.draw();
 	}
 }
