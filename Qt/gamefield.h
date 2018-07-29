@@ -19,7 +19,7 @@ class GameField : public QFrame
     Q_OBJECT
 
 public:
-    explicit GameField(QWidget *parent = 0);
+    explicit GameField(QWidget *parent = nullptr);
     ~GameField();
 
     using Field = std::vector<std::vector<Cell*>>;

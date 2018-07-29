@@ -12,8 +12,8 @@ class Cell : public QWidget
     Q_OBJECT
 
 public:
-    explicit Cell(QWidget *parent = 0);
-    explicit Cell(int point_, QWidget *parent = 0);
+    explicit Cell(QWidget *parent = nullptr);
+    explicit Cell(int point_, QWidget *parent = nullptr);
     ~Cell();
 
     enum Status{
