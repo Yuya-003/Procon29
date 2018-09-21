@@ -20,6 +20,9 @@ void MainWindow::openSettingDialog()
     connect(dialog, SIGNAL(sendTurn(int)), ui->gamefield, SLOT(changeTurn(int)));
     connect(dialog, SIGNAL(requestInit()), ui->gamefield, SLOT(initField()));
 
+    connect(ui->setHorizontalButton, SIGNAL(clicked()), this, SLOT(on_horizontal_button_clicked()));
+    connect(ui->setVerticalButton,   SIGNAL(clicked()), this, SLOT(on_vertical_button_clicked()));
+
     dialog->changeMapSize(ui->gamefield->map_x, ui->gamefield->map_y);
     dialog->changeTurn(ui->gamefield->turn);
     dialog->exec();
@@ -38,7 +41,12 @@ void MainWindow::on_reset_button_clicked()
 
 }
 
-void MainWindow::on_shuffle_button_clicked()
+void MainWindow::on_horizontal_button_clicked()
 {
-    ui->gamefield->initField();
+
+}
+
+void MainWindow::on_vertical_button_clicked()
+{
+
 }
