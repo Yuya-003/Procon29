@@ -5,3 +5,6 @@ Qt/*vcx*
 Qt/GeneratedFiles/*
 Qt/*sln
 Qt/*stash
+.vs/
+.vscode/
+Test/
