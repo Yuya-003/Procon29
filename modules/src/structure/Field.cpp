@@ -7,11 +7,6 @@ Field::Field(size_t h, size_t w)
 	}
 }
 
-std::vector<Field::Cell> Field::operator[](size_t i)
-{
-	return this->cells[i];
-}
-
 void Field::resize(size_t h, size_t w)
 {
 	this->cells.resize(h);
