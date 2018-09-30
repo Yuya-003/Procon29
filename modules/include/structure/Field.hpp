@@ -16,9 +16,9 @@ private:
         Status status;
     };
 
-    std::vector<std::vector<Cell>> c;
-
 public:
+
+	std::vector<std::vector<Cell>> cells;
 
 	Field(size_t h = 0, size_t w = 0);
 	std::vector<Cell> operator[] (size_t i);
