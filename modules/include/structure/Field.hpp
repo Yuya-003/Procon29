@@ -1,23 +1,10 @@
 #pragma once
 
 #include <vector>
+#include <structure/Cell.hpp>
 
 class Field {
 public:
-	enum Status {
-		none
-	};
-    
-private:
-
-    class Cell{
-    public:
-        int point;
-        Status status;
-    };
-
-public:
-
 	std::vector<std::vector<Cell>> cells;
 
 	Field(size_t h = 0, size_t w = 0);
