@@ -3,7 +3,7 @@
 #include <vector>
 #include <array>
 #include <structure/Cell.hpp>
-#include <structure/Point.hpp>
+#include <structure/Position.hpp>
 
 class Field {
 public:
