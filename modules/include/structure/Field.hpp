@@ -8,8 +8,8 @@
 class Field {
 public:
 	std::vector<std::vector<Cell>> cells;
-	std::array<Point, 2> team1;
-	std::array<Point, 2> team2;
+	std::array<Position, 2> team1;
+	std::array<Position, 2> team2;
 
 	Field(size_t h = 0, size_t w = 0);
 	void resize(size_t h, size_t w);
