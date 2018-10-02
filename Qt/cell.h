@@ -4,17 +4,17 @@
 #include <QWidget>
 
 namespace Ui {
-class Cell;
+class QtCell;
 }
 
-class Cell : public QWidget
+class QtCell : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Cell(QWidget *parent = nullptr);
-    explicit Cell(int point_, QWidget *parent = nullptr);
-    ~Cell();
+    explicit QtCell(QWidget *parent = nullptr);
+    explicit QtCell(int point_, QWidget *parent = nullptr);
+    ~QtCell();
 
     enum Status{
         none, pl1, pl2, area1, area2
@@ -24,7 +24,7 @@ public:
     Status status = none;
 
 private:
-    Ui::Cell *ui;
+    Ui::QtCell *ui;
 };
 
 #endif // CELL_H

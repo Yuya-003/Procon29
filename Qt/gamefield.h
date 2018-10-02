@@ -22,7 +22,7 @@ public:
     explicit GameField(QWidget *parent = nullptr);
     ~GameField();
 
-    using Field = std::vector<std::vector<Cell*>>;
+    using Field = std::vector<std::vector<QtCell*>>;
 
     int map_x, map_y;
     int turn;

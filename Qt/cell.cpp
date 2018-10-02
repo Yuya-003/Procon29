@@ -1,9 +1,9 @@
 #include "cell.h"
 #include "ui_cell.h"
 
-Cell::Cell(QWidget *parent) :
+QtCell::QtCell(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Cell)
+    ui(new Ui::QtCell)
 {
     ui->setupUi(this);
 
@@ -19,13 +19,13 @@ Cell::Cell(QWidget *parent) :
 
 }
 
-Cell::Cell(int point_, QWidget *parent) :
-    Cell(parent)
+QtCell::QtCell(int point_, QWidget *parent) :
+    QtCell(parent)
 {
     ui->label->setText(QString::number(point = point_));
 }
 
-Cell::~Cell()
+QtCell::~QtCell()
 {
     delete ui;
 }

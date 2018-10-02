@@ -20,6 +20,7 @@ void MainWindow::openSettingDialog()
     connect(dialog, SIGNAL(sendTurn(int)), ui->gamefield, SLOT(changeTurn(int)));
     connect(dialog, SIGNAL(requestInit()), ui->gamefield, SLOT(initField()));
 
+
     connect(ui->setHorizontalButton, SIGNAL(clicked()), this, SLOT(on_horizontal_button_clicked()));
     connect(ui->setVerticalButton,   SIGNAL(clicked()), this, SLOT(on_vertical_button_clicked()));
 
@@ -36,17 +37,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_reset_button_clicked()
+void MainWindow::importFromQR()
 {
 
 }
 
-void MainWindow::on_horizontal_button_clicked()
-{
-
-}
-
-void MainWindow::on_vertical_button_clicked()
-{
-
-}

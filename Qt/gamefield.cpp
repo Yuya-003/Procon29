@@ -50,21 +50,21 @@ void GameField::initField()
 	if (true) {
 
         for (int i = 0; i < map_y / 2; i++) {
-			std::vector<Cell*> row;
+			std::vector<QtCell*> row;
 			std::vector<int> dataRow;
 
 			for (int j = 0; j < this->map_x; j++) {
 
 				if (seihu(mt) == 1) {			//負の点数
 					int data = minusRnd(mt);
-					Cell *cell = new Cell(data, this);
+					QtCell *cell = new QtCell(data, this);
 					this->grid->addWidget(cell, i, j);
 					row.push_back(cell);
 					dataRow.push_back(data);
 				}
 				else {							//正の点数
 					int data = plusRnd(mt);
-					Cell *cell = new Cell(data, this);
+					QtCell *cell = new QtCell(data, this);
 					this->grid->addWidget(cell, i, j);
 					row.push_back(cell);
 					dataRow.push_back(data);
@@ -76,10 +76,10 @@ void GameField::initField()
 
 		//(map_y % 2 == 0) ? 0 : 1 … map_y
         for (int i = map_y; i < (map_y / 2) + 1 +  (map_y % 2 == 0) ? 0 : 1; i--) {
-			std::vector<Cell*> row;
+			std::vector<QtCell*> row;
 			for (int j = 0; j < this->map_x; j++) {
 
-                Cell *cell = new Cell(glidData[-i + map_y][j], this);
+                QtCell *cell = new QtCell(glidData[-i + map_y][j], this);
 				this->grid->addWidget(cell, i, j);
 				row.push_back(cell);
 
@@ -90,21 +90,21 @@ void GameField::initField()
 	}
 	else {
 		for (int i = 0; i < this->map_y; i++) {
-			std::vector<Cell*> row;
+			std::vector<QtCell*> row;
 			std::vector<int> dataRow;
 
 			for (int j = 0; j < this->map_x / 2; j++) {
 
 				if (seihu(mt) == 1) {			//負の点数
 					int data = minusRnd(mt);
-					Cell *cell = new Cell(data, this);
+					QtCell *cell = new QtCell(data, this);
 					this->grid->addWidget(cell, i, j);
 					row.push_back(cell);
 					dataRow.push_back(data);
 				}
 				else {							//正の点数
 					int data = plusRnd(mt);
-					Cell *cell = new Cell(data, this);
+					QtCell *cell = new QtCell(data, this);
 					this->grid->addWidget(cell, i, j);
 					row.push_back(cell);
 					dataRow.push_back(data);
@@ -117,10 +117,10 @@ void GameField::initField()
         //(map_y % 2 == 0) ? 0 : 1 …
 
         for (int i = this->map_y; i < (map_y / 2) + 1 + (map_y % 2 == 0) ? 0 : 1; i--) {
-			std::vector<Cell*> row;
+			std::vector<QtCell*> row;
 			for (int j = 0; j < this->map_x; j++) {
 
-                Cell *cell = new Cell(glidData[-i + map_y][j], this);
+                QtCell *cell = new QtCell(glidData[-i + map_y][j], this);
 				this->grid->addWidget(cell, i, j);
 				row.push_back(cell);
 
