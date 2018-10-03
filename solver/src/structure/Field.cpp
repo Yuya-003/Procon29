@@ -16,3 +16,13 @@ void Field::resize(size_t h, size_t w)
 	}
 	this->cells.shrink_to_fit();
 }
+
+size_t Field::rowSize()
+{
+	return this->cells.size();
+}
+
+size_t Field::colSize()
+{
+	return this->cells[0].size();
+}
