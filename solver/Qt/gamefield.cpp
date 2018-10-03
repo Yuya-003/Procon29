@@ -1,4 +1,4 @@
-#include "gamefield.h"
+﻿#include "gamefield.h"
 #include "ui_gamefield.h"
 
 GameField::GameField(QWidget *parent) :
@@ -13,6 +13,8 @@ GameField::GameField(QWidget *parent) :
     this->map_x = 10;
     this->map_y = 8;
     this->turn = 60;
+	this->point = 0;
+
 
     this->grid = new QGridLayout(this);
     this->grid->setSpacing(0);
@@ -53,7 +55,7 @@ void GameField::initField()
 			std::vector<QtCell*> row;
 			std::vector<int> dataRow;
 
-			for (int j = 0; j < this->map_x; j++) {
+			for (auto j = 0; j < this->map_x; j++) {
 
 				if (seihu(mt) == 1) {			//負の点数
 					int data = minusRnd(mt);

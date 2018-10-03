@@ -23,7 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 INCLUDEPATH += \
-    ../modules/include/ \
+    ../include/ \
 
 SOURCES += \
         main.cpp \
@@ -31,14 +31,14 @@ SOURCES += \
     settingdialog.cpp \
     cell.cpp \
     gamefield.cpp \
-    ../modules/src/structure/Field.cpp \
+    ../src/structure/Field.cpp \
 
 HEADERS += \
         mainwindow.h \
     settingdialog.h \
     cell.h \
     gamefield.h \
-    ../modules/include/structure/Field.hpp \
+    ../include/structure/Field.hpp \
 
 FORMS += \
         mainwindow.ui \

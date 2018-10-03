@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -19,10 +19,6 @@ void MainWindow::openSettingDialog()
     connect(dialog, SIGNAL(sendMapSize(int,int)), ui->gamefield, SLOT(changeMapSize(int,int)));
     connect(dialog, SIGNAL(sendTurn(int)), ui->gamefield, SLOT(changeTurn(int)));
     connect(dialog, SIGNAL(requestInit()), ui->gamefield, SLOT(initField()));
-
-
-    connect(ui->setHorizontalButton, SIGNAL(clicked()), this, SLOT(on_horizontal_button_clicked()));
-    connect(ui->setVerticalButton,   SIGNAL(clicked()), this, SLOT(on_vertical_button_clicked()));
 
     dialog->changeMapSize(ui->gamefield->map_x, ui->gamefield->map_y);
     dialog->changeTurn(ui->gamefield->turn);

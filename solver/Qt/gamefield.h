@@ -9,6 +9,7 @@
 
 #include <random>
 #include <vector>
+#include <structure/Field.hpp>
 
 namespace Ui {
 class GameField;
@@ -22,19 +23,22 @@ public:
     explicit GameField(QWidget *parent = nullptr);
     ~GameField();
 
-    using Field = std::vector<std::vector<QtCell*>>;
+    using QtField = std::vector<std::vector<QtCell*>>;
 
     int map_x, map_y;
-    int turn;
+    int turn, point;
 
-    Field field;
+    QtField field;
+
     QGridLayout *grid;
+    Field fieldData;
 
     std::mt19937 mt;
 
 public slots:
     void changeMapSize(int x, int y);
     void changeTurn(int turn);
+    //void changePoint(int point);
     void initField();
 
 private:
