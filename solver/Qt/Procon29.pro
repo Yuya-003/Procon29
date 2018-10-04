@@ -29,20 +29,22 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     settingdialog.cpp \
-    cell.cpp \
     gamefield.cpp \
+    qtcell.cpp \
     ../src/structure/Field.cpp \
+
 
 HEADERS += \
         mainwindow.h \
     settingdialog.h \
-    cell.h \
     gamefield.h \
+    qtcell.h \
     ../include/structure/Field.hpp \
+
 
 FORMS += \
         mainwindow.ui \
     settingdialog.ui \
     settingdialog.ui \
     cell.ui \
-    gamefield.ui
+    gamefield.ui \
