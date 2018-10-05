@@ -1,4 +1,4 @@
-﻿#include "mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -8,8 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->setting,SIGNAL(triggered()),this,SLOT(openSettingDialog()));
+    connect(ui->importQR, SIGNAL(triggered()), this, SLOT(importFromQR()));
 
     ui->label_turn->setText(QString::number(ui->gamefield->turn));
+    ui->label_points->setText(QString::number(ui->gamefield->point));
 }
 
 void MainWindow::openSettingDialog()

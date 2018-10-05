@@ -28,12 +28,14 @@ public:
     int map_x, map_y;
     int turn, point;
 
-    QtField field;
+    //Qt側のField
+    QtField qtField;
 
     QGridLayout *grid;
+
+    //structure側のField
     Field fieldData;
 
-    std::mt19937 mt;
 
 public slots:
     void changeMapSize(int x, int y);
