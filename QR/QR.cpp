@@ -1,8 +1,11 @@
 #include "QR.hpp"
+#include <string>
 
 void Main()
 {
 	Window::Resize(1280, 720);
+
+	bool isWebcamMoving = false;
 
 	Webcam webcam(0);
 
@@ -12,14 +15,14 @@ void Main()
 	Image image;
 	DynamicTexture texture;
 	QRDecoder qrDecoder;
-
 	QRInfo qr;
-	String qrText = U"No text.";
-	static bool isCameraStopped = false;
 
 	while (System::Update())
 	{
-		ClearPrint();
+		if (KeyEnter.down()) {
+			webcam.stop();
+			WebcamStop(webcam);
+		}
 
 		if (webcam.hasNewFrame())
 		{
@@ -33,19 +36,22 @@ void Main()
 
 			if (contents.text)
 			{
-				qrText = contents.text;
+				Print << contents.text;
 				qr.SetString(contents.text.narrow());
 			}
-		}
+			else {
+				Print << U"No text";
+			}
 
-		if (KeyEnter.down()) {
-			webcam.stop();
-			isCameraStopped = true;
+			std::string qrContent = qr.GetString();
+			Print << qrContent;
 		}
-
-		Print << qrText;
 
 		texture.fill(image);
 		texture.draw();
 	}
+}
+
+void WebcamStop(Webcam webcam) {
+	
 }
