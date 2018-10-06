@@ -37,6 +37,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::importFromQR()
 {
+    //この辺にQRからデータを受け取れそうな関数を置く
+    //field =
+
 
 }
 

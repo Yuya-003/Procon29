@@ -7,9 +7,6 @@ GameField::GameField(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //乱数のシード値を設定
-    mt.seed(std::random_device()());
-
     this->map_x = 10;
     this->map_y = 8;
     this->turn = 60;
@@ -29,8 +26,6 @@ GameField::~GameField()
 
 void GameField::initField()
 {
-
-
     for(auto row:this->qtField){
         for(auto cell : row){
             this->grid->removeWidget(cell);
@@ -38,9 +33,6 @@ void GameField::initField()
         }
     }
     this->qtField.clear();
-
-
-
 
 
     for (auto i = 0; i < map_y ; i++) {

@@ -28,6 +28,8 @@ public:
     int map_x, map_y;
     int turn, point;
 
+    enum phase{term1_1, team1_2, team2_1, tean2_2};
+
     //Qt側のField
     QtField qtField;
 
