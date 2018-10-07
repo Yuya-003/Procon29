@@ -5,10 +5,6 @@
 #include <sstream>
 #include <structure/Field.hpp>
 
-struct Place {
-	int x, y;
-};
-
 class QRInfo {
 private:
 	static std::string qrText;
@@ -39,39 +35,49 @@ public:
 
 	static Field GetQRContent() {
 		Field field;
-		Cell temp;
+		Position firstPlace[2];
 		size_t h, w;
+		std::vector<std::string> splitText;
 		std::vector<std::vector<int>> splitValue;
-		struct Place firstPlace[2];
-
+		
 		for (const auto tempStr : Split(qrText, ':')) {
-			for (unsigned int i = 0; i < tempStr.length(); i++) {
-				for (const auto splitStr : Split(tempStr, ' ')) {
-					splitValue[i].push_back(atoi(splitStr.c_str()));
-				}
+			splitText.push_back(tempStr);
+		}
+
+		for (int i = 0; i < splitText.size(); i++) {
+			std::vector<int> temp;
+			std::vector<std::string> splitStr = Split(splitText[i], ' ');
+
+			for (int j = 0; j < splitStr.size(); j++) {
+				temp.push_back(atoi(splitStr[j].c_str()));
 			}
+
+			splitValue.push_back(temp);
 		}
 
 		h = splitValue[0][0];
 		w = splitValue[0][1];
-		firstPlace[0] = { splitValue[h + 1][0] ,splitValue[h + 1][1] };
-		firstPlace[1] = { splitValue[h + 2][0] ,splitValue[h + 2][1] };
-
-		field.resize(h, w);
+		firstPlace[0] = { splitValue[h + 1][0] - 1 ,splitValue[h + 1][1] - 1 };
+		firstPlace[1] = { splitValue[h + 2][0] - 1 ,splitValue[h + 2][1] - 1 };
 
 		for (unsigned int i = 0; i < h; i++) {
+			std::vector<Cell> cellArray;
+
 			for (unsigned int j = 0; j < w; j++) {
-				temp.point = splitValue[i + 1][j];
-				temp.status = temp.none;
+				Cell tempCell;
+				tempCell.point = splitValue[i + 1][j];
+				tempCell.status = tempCell.none;
 
-				field.cells[i].push_back(temp);
+				cellArray.push_back(tempCell);
 			}
+
+			field.cells.push_back(cellArray);
 		}
 
-		for (int i = 0; i < 2; i++) {
-			field.cells[firstPlace[0].x][firstPlace[0].x].status = temp.team1;
-			field.cells[firstPlace[1].x][firstPlace[1].x].status = temp.team2;
-		}
+		field.cells[firstPlace[0].x][firstPlace[0].y].status = Cell::team1;
+		field.cells[firstPlace[0].x][firstPlace[1].y].status = Cell::team2;
+		field.cells[firstPlace[1].x][firstPlace[0].y].status = Cell::team2;
+		field.cells[firstPlace[1].x][firstPlace[1].y].status = Cell::team1;
 
 		return field;
 	}
