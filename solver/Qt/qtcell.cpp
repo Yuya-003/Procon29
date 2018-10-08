@@ -1,4 +1,4 @@
-#include "cell.h"
+#include "qtcell.h"
 #include "ui_cell.h"
 
 QtCell::QtCell(QWidget *parent) :
@@ -16,7 +16,6 @@ QtCell::QtCell(QWidget *parent) :
     pal.setColor(QPalette::Background, Qt::white);
     ui->label->setAutoFillBackground(true);
     ui->label->setPalette(pal);
-
 }
 
 QtCell::QtCell(int point_, QWidget *parent) :

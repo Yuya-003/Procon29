@@ -32,6 +32,7 @@ SOURCES += \
     gamefield.cpp \
     qtcell.cpp \
     ../src/structure/Field.cpp \
+    ../src/structure/Cell.cpp \
 
 
 HEADERS += \
@@ -39,7 +40,9 @@ HEADERS += \
     settingdialog.h \
     gamefield.h \
     qtcell.h \
+    ../include/structure/Cell.hpp \
     ../include/structure/Field.hpp \
+    ../include/structure/Position.hpp \
 
 
 FORMS += \

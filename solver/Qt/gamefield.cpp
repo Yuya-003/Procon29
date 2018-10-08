@@ -17,6 +17,11 @@ GameField::GameField(QWidget *parent) :
     this->grid->setSpacing(0);
     this->grid->setMargin(0);
     initField();
+
+
+    connect(this, &GameField::mousePressEvent, [&](){
+
+    });
 }
 
 GameField::~GameField()
@@ -52,6 +57,11 @@ void GameField::initField()
     }
 
     this->qtField.shrink_to_fit();
+}
+
+void GameField::cellClicked()
+{
+
 }
 
 void GameField::changeMapSize(int x, int y)

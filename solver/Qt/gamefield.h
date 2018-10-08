@@ -13,6 +13,7 @@
 
 namespace Ui {
 class GameField;
+
 }
 
 class GameField : public QFrame
@@ -28,7 +29,11 @@ public:
     int map_x, map_y;
     int turn, point;
 
-    enum phase{term1_1, team1_2, team2_1, tean2_2};
+    //専攻チームの1人目、2人目、後攻チームの1人目、2人目
+    enum phase{
+        term1_1, team1_2, team2_1, tean2_2
+    };
+
 
     //Qt側のField
     QtField qtField;
@@ -36,14 +41,19 @@ public:
     QGridLayout *grid;
 
     //structure側のField
-    Field fieldData;
+    //Field fieldData;
 
 
 public slots:
     void changeMapSize(int x, int y);
+
     void changeTurn(int turn);
+
     //void changePoint(int point);
+
     void initField();
+
+    void cellClicked();
 
 private:
     Ui::GameField *ui;

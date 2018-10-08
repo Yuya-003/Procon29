@@ -37,9 +37,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::importFromQR()
 {
-    //この辺にQRからデータを受け取れそうな関数を置く
-    //field =
+    //QRコードからデータを受け取る
+	Field field = Field();
+
+    //FieldクラスからQtFieldクラスへ変換
+
+	for (auto i = 0; i < field.cells.size(); i++) {
+
+		ui->gamefield->qtField.push_back(std::vector<QtCell *>());
+
+		for (auto j = 0; j < field.cells[i].size(); j++) {
+			ui->gamefield->qtField[i][j]->point = field.cells[i][j].point;
+		}
+	}
 
 
 }
-
