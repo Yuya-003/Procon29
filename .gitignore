@@ -1,2 +1,3 @@
-Qt/Procon29.pro.user
-Qt/build*
+.vs/
+.vscode/
+Test/
