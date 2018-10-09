@@ -1,4 +1,4 @@
-#include "qtcell.h"
+﻿#include "qtcell.h"
 #include "ui_cell.h"
 
 QtCell::QtCell(QWidget *parent) :
@@ -27,4 +27,41 @@ QtCell::QtCell(int point_, QWidget *parent) :
 QtCell::~QtCell()
 {
     delete ui;
+}
+
+void QtCell::mousePressEvent(QMouseEvent *event)
+{
+    QPalette pal;
+    ui->label->setAutoFillBackground(true);
+
+
+    if(true){
+
+    }
+    if(event->button() == Qt::LeftButton){
+
+         //team1側の操作
+        if(Ui::phase == Ui::team1_1){
+             pal.setColor(QPalette::Background, Qt::blue);
+             this->status = this->pl1;
+             Ui::phase = Ui::team1_1;
+        }
+        else if (Ui::phase == Ui::team1_2){
+            pal.setColor(QPalette::Background, Qt::blue);
+            this->status = this->pl1;
+            Ui::phase = Ui::team2_1;
+        }
+        else if(Ui::phase == Ui::team2_1){
+             pal.setColor(QPalette::Background, Qt::red);
+             this->status = this->pl2;
+             Ui::phase = Ui::team2_2;
+        }
+        else if (Ui::phase == Ui::team2_2){
+            pal.setColor(QPalette::Background, Qt::red);
+            this->status = this->pl2;
+            Ui::phase = Ui::team1_1;
+        }
+
+    }
+    ui->label->setPalette(pal);
 }

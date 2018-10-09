@@ -1,10 +1,21 @@
-#ifndef CELL_H
+﻿#ifndef CELL_H
 #define CELL_H
 
 #include <QWidget>
+#include <QMouseEvent>
+#include <structure/Field.hpp>
 
 namespace Ui {
 class QtCell;
+
+//専攻チームの1人目、2人目、後攻チームの1人目、2人目
+enum Phase{
+    team1_1, team1_2, team2_1, team2_2
+};
+
+static Phase phase = team1_1;
+
+static Field fieldData;
 }
 
 class QtCell : public QWidget
@@ -22,6 +33,9 @@ public:
 
     int point = 0;
     Status status = none;
+
+protected:
+    void mousePressEvent(QMouseEvent *event);
 
 private:
     Ui::QtCell *ui;

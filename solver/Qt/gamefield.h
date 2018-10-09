@@ -1,4 +1,4 @@
-#ifndef GAMEFIELD_H
+﻿#ifndef GAMEFIELD_H
 #define GAMEFIELD_H
 
 #include "cell.h"
@@ -29,12 +29,6 @@ public:
     int map_x, map_y;
     int turn, point;
 
-    //専攻チームの1人目、2人目、後攻チームの1人目、2人目
-    enum phase{
-        term1_1, team1_2, team2_1, tean2_2
-    };
-
-
     //Qt側のField
     QtField qtField;
 
@@ -52,8 +46,6 @@ public slots:
     //void changePoint(int point);
 
     void initField();
-
-    void cellClicked();
 
 private:
     Ui::GameField *ui;
