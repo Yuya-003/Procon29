@@ -15,7 +15,7 @@ enum Phase{
 
 static Phase phase = team1_1;
 
-static Field fieldData;
+//static Field fieldData;
 }
 
 class QtCell : public QWidget
@@ -35,6 +35,7 @@ public:
     Status status = none;
 
 protected:
+    //マウスクリック時のイベントハンドラ(オーバーライド)
     void mousePressEvent(QMouseEvent *event);
 
 private:
