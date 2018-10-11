@@ -15,4 +15,6 @@ public:
 	void resize(size_t h, size_t w);
 	size_t rowSize(); //行数
 	size_t colSize(); //列数
+
+	int calcScore(int team); //team:1(自分),2(相手)
 };

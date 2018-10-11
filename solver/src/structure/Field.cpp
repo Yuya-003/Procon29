@@ -26,3 +26,17 @@ size_t Field::colSize()
 {
 	return this->cells[0].size();
 }
+
+int calcScore(int team)
+{
+	int score = 0;
+
+	if(team == 1){
+
+	}
+	else{
+
+	}
+
+	return score;
+}
