@@ -45,6 +45,8 @@ public slots:
 
     //void changePoint(int point);
 
+    void setTeam(QMouseEvent *event);
+
     void initField();
 
 private:

@@ -17,6 +17,7 @@ GameField::GameField(QWidget *parent) :
     this->grid->setSpacing(0);
     this->grid->setMargin(0);
     initField();
+
 }
 
 GameField::~GameField()
@@ -64,3 +65,4 @@ void GameField::changeTurn(int turn)
 {
     this->turn = turn;
 }
+

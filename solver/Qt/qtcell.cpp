@@ -31,6 +31,44 @@ QtCell::~QtCell()
 
 void QtCell::mousePressEvent(QMouseEvent *event)
 {
+    emit m_mouseClickEvent(event);
+//    QPalette pal;
+//    ui->label->setAutoFillBackground(true);
+
+//    if(event->button() == Qt::LeftButton){
+
+//         //team1側の操作
+//        if(Ui::phase == Ui::team1_1){
+//            //それっぽい青(エジプシャンブルー)
+//             pal.setColor(QPalette::Background, "#0073a8");
+//             this->status = this->pl1;
+//             Ui::phase = Ui::team1_2;
+//        }
+//        else if (Ui::phase == Ui::team1_2){
+//            //それっぽい青(エジプシャンブルー)
+//            pal.setColor(QPalette::Background, "#0073a8");
+//            this->status = this->pl1;
+//            Ui::phase = Ui::team2_1;
+//        }
+//        else if(Ui::phase == Ui::team2_1){
+//            //それっぽい赤(トマトレッド)
+//             pal.setColor(QPalette::Background, "#ea5549");
+//             this->status = this->pl2;
+//             Ui::phase = Ui::team2_2;
+//        }
+//        else if (Ui::phase == Ui::team2_2){
+//            //それっぽい赤(トマトレッド)
+//            pal.setColor(QPalette::Background, "#ea5549");
+//            this->status = this->pl2;
+//            Ui::phase = Ui::team1_1;
+//        }
+
+//    }
+//    ui->label->setPalette(pal);
+}
+
+void QtCell::setTeam(QMouseEvent *event)
+{
     QPalette pal;
     ui->label->setAutoFillBackground(true);
 

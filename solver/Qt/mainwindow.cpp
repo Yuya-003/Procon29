@@ -12,6 +12,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->label_turn->setText(QString::number(ui->gamefield->turn));
     ui->label_points->setText(QString::number(ui->gamefield->point));
+
+    //QtCell内mousePressEvent と QtCell::QMouseEvent をconnect
+    //QtCell *qtcell = new QtCell();
+    for(auto row : ui->gamefield->qtField){
+        for(auto cell : row){
+            connect(cell, SIGNAL(m_mouseClickEvent(QMouseEvent*)), cell, SLOT(setTeam(QMouseEvent*)));
+        }
+    }
+
+    //delete qtcell;
 }
 
 void MainWindow::openSettingDialog()

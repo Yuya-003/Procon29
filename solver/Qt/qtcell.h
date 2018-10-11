@@ -34,6 +34,12 @@ public:
     int point = 0;
     Status status = none;
 
+public slots:
+    void setTeam(QMouseEvent *event);
+
+signals:
+    void m_mouseClickEvent(QMouseEvent *event);
+
 protected:
     //マウスクリック時のイベントハンドラ(オーバーライド)
     void mousePressEvent(QMouseEvent *event);

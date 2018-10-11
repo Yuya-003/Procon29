@@ -51,3 +51,5 @@ FORMS += \
     settingdialog.ui \
     cell.ui \
     gamefield.ui \
+
+QMAKE_CXXFLAGS += /std:c++latest
