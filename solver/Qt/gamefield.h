@@ -27,7 +27,7 @@ public:
     using QtField = std::vector<std::vector<QtCell*>>;
 
     int map_x, map_y;
-    int turn, point;
+    int turn, pointTeam1, pointTeam2;
 
     //Qt側のField
     QtField qtField;
@@ -45,7 +45,7 @@ public slots:
 
     //void changePoint(int point);
 
-    void setTeam(QMouseEvent *event);
+    //void setTeam(QMouseEvent *event);
 
     void initField();
 

@@ -35,12 +35,9 @@ public:
     Status status = none;
 
 public slots:
-    void setTeam(QMouseEvent *event);
+    void setTeam(void);
 
-signals:
-    void m_mouseClickEvent(QMouseEvent *event);
-
-protected:
+public:
     //マウスクリック時のイベントハンドラ(オーバーライド)
     void mousePressEvent(QMouseEvent *event);
 

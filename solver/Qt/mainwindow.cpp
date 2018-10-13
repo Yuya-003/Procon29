@@ -11,17 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->importQR, SIGNAL(triggered()), this, SLOT(importFromQR()));
 
     ui->label_turn->setText(QString::number(ui->gamefield->turn));
-    ui->label_points->setText(QString::number(ui->gamefield->point));
-
-    //QtCell内mousePressEvent と QtCell::QMouseEvent をconnect
-    //QtCell *qtcell = new QtCell();
-    for(auto row : ui->gamefield->qtField){
-        for(auto cell : row){
-            connect(cell, SIGNAL(m_mouseClickEvent(QMouseEvent*)), cell, SLOT(setTeam(QMouseEvent*)));
-        }
-    }
-
-    //delete qtcell;
+    ui->label_pointTeam1->setText(QString::number(ui->gamefield->pointTeam1));
+    ui->label_pointTeam2->setText(QString::number(ui->gamefield->pointTeam2));
 }
 
 void MainWindow::openSettingDialog()
@@ -60,6 +51,19 @@ void MainWindow::importFromQR()
 			ui->gamefield->qtField[i][j]->point = field.cells[i][j].point;
 		}
 	}
+
+    //QtCell内mousePressEvent と QtCell::QMouseEvent をconnect
+    QtCell *qtcell = new QtCell();
+
+
+    for(auto row : ui->gamefield->qtField){
+        for(auto cell : row){
+
+            //connect(cell->, SIGNAL(clicked()), cell, SLOT(setTeam()));
+
+        }
+    }
+
 
 
 }

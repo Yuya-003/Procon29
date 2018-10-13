@@ -10,12 +10,14 @@ GameField::GameField(QWidget *parent) :
     this->map_x = 10;
     this->map_y = 8;
     this->turn = 60;
-	this->point = 0;
+    this->pointTeam1 = 0;
+    this->pointTeam2 = 0;
 
 
     this->grid = new QGridLayout(this);
     this->grid->setSpacing(0);
     this->grid->setMargin(0);
+
     initField();
 
 }
