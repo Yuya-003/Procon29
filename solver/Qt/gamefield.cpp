@@ -1,4 +1,4 @@
-#include "gamefield.h"
+﻿#include "gamefield.h"
 #include "ui_gamefield.h"
 
 GameField::GameField(QWidget *parent) :
@@ -18,8 +18,18 @@ GameField::GameField(QWidget *parent) :
     this->grid->setSpacing(0);
     this->grid->setMargin(0);
 
-    initField();
 
+    auto *qtcell = new QtCell();
+    //connect(qtcell, SIGNAL(clicked()), this, SLOT(updateField()));
+
+    for(auto row : this->qtField){
+        for(auto cell : row){
+            //connect(cell, SIGNAL(clicked(QMouseEvent*)), this, SLOT(updateField(QMouseEvent*)));
+        }
+    }
+    delete qtcell;
+
+    initField();
 }
 
 GameField::~GameField()
@@ -66,5 +76,18 @@ void GameField::changeMapSize(int x, int y)
 void GameField::changeTurn(int turn)
 {
     this->turn = turn;
+}
+
+void GameField::updateField(QMouseEvent *e)
+{
+    auto cellSize = 50;
+    auto point = e->pos();
+    auto gx = point.x() / cellSize;
+    auto gy = point.y() / cellSize;
+
+    if(Ui::phase == Ui::team1_1 || Ui::phase == Ui::team1_2)
+        Ui::fieldData.cells[gx][gy].status = Ui::fieldData.cells[0][0].team1;
+    else
+        Ui::fieldData.cells[gx][gy].status = Ui::fieldData.cells[0][0].team2;
 }
 

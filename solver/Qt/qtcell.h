@@ -33,8 +33,15 @@ public:
     int point = 0;
     Status status = none;
 
+signals:
+    void clicked(QMouseEvent *e);
+
 public slots:
-    void setTeam(void);
+    void setTeam();
+
+protected:
+    //mousePressEvent オーバーライドし、QMouseEvent* 型を引数に持つシグナルをオーバーロード
+    void mousePressEvent(QMouseEvent *e);
 
 private:
     Ui::QtCell *ui;

@@ -27,10 +27,13 @@ QtCell::~QtCell()
     delete ui;
 }
 
-void QtCell::setTeam(void)
+void QtCell::mousePressEvent(QMouseEvent *e)
 {
-    QPalette pal;
+    emit clicked(e);
+}
 
+void QtCell::setTeam()
+{
     //team1側の操作
     if(Ui::phase == Ui::team1_1){
         //それっぽい青(サファイアブルー)
@@ -57,5 +60,4 @@ void QtCell::setTeam(void)
         Ui::phase = Ui::team1_1;
     }
 
-    ui->pushButton->setPalette(pal);
 }

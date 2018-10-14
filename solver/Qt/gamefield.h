@@ -38,12 +38,14 @@ public:
     //structure側のField
     //Field fieldData;
 
-    void mousePressEvent(QMouseEvent *event);
+
 
 public slots:
     void changeMapSize(int x, int y);
 
     void changeTurn(int turn);
+
+    void updateField(QMouseEvent *e);
 
     //void changePoint(int point);
 
