@@ -39,31 +39,17 @@ MainWindow::~MainWindow()
 void MainWindow::importFromQR()
 {
     //QRコードからデータを受け取る
-	Field field = Field();
+    Ui::fieldData = Field();
+
 
     //FieldクラスからQtFieldクラスへ変換
-
-	for (auto i = 0; i < field.cells.size(); i++) {
-
+    for (auto i = 0; i < Ui::fieldData.cells.size(); i++)
+    {
 		ui->gamefield->qtField.push_back(std::vector<QtCell *>());
-
-		for (auto j = 0; j < field.cells[i].size(); j++) {
-			ui->gamefield->qtField[i][j]->point = field.cells[i][j].point;
+        for (auto j = 0; j < Ui::fieldData.cells[i].size(); j++)
+        {
+            ui->gamefield->qtField[i][j]->point = Ui::fieldData.cells[i][j].point;
 		}
 	}
-
-    //QtCell内mousePressEvent と QtCell::QMouseEvent をconnect
-    QtCell *qtcell = new QtCell();
-
-
-    for(auto row : ui->gamefield->qtField){
-        for(auto cell : row){
-
-            //connect(cell->, SIGNAL(clicked()), cell, SLOT(setTeam()));
-
-        }
-    }
-
-
 
 }

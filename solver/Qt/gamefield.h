@@ -1,11 +1,12 @@
 ﻿#ifndef GAMEFIELD_H
 #define GAMEFIELD_H
 
-#include "cell.h"
+#include "qtcell.h"
 
 #include <QFrame>
 #include <QLabel>
 #include <QGridLayout>
+#include <QMouseEvent>
 
 #include <random>
 #include <vector>
@@ -37,6 +38,7 @@ public:
     //structure側のField
     //Field fieldData;
 
+    void mousePressEvent(QMouseEvent *event);
 
 public slots:
     void changeMapSize(int x, int y);
