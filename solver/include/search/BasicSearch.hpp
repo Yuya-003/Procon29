@@ -1,22 +1,18 @@
 #pragma once
 
-#include <Field.hpp>
+#include <structure/Field.hpp>
+#include <structure/Position.hpp>
+#include <structure/Behavior.hpp>
 
-#include <queue>
-#include <list>
+#include <vector>
+#include <array>
 
 class BasicSearch{
 public:
-    class Node{
-    public:
-        Field field;
-        int turn, count_search;
-    };
 
     int limit_search;
-    std::queue<Node> queue;
 
     BasicSearch();
 
-    virtual void search();
+    virtual std::array<Behavior, 2> search(Field field);
 };

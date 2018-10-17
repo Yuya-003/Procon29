@@ -2,10 +2,8 @@
 
 BasicSearch::BasicSearch()
 {
-    
 }
 
-void BasicSearch::search()
+std::array<Behavior, 2> BasicSearch::search(Field field)
 {
-
 }
