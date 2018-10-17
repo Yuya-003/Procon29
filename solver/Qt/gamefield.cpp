@@ -1,8 +1,28 @@
 ﻿#include "gamefield.h"
 #include "ui_gamefield.h"
 
+void GameField::drawField(Field field)
+{
+//    QPainter painter(this);
+//    painter.begin(this);
+
+//    painter.setPen(Qt::black);
+//    painter.setBrush(Qt::black);
+
+//    int x = 0, y = 0;
+
+//    for(int i = 0; i < map_y; i++){
+//        for(int j = 0; j < map_x;j++){
+//            painter.drawRect(x, y, CELL_SIZE, CELL_SIZE);
+//            painter.drawText(x, y + CELL_SIZE, std::to_string(field.cells[i][j].point).c_str());
+//            x += CELL_SIZE;
+//        }
+//        y += CELL_SIZE;
+//    }
+}
+
 GameField::GameField(QWidget *parent) :
-    QFrame(parent),
+    QWidget(parent),
     ui(new Ui::GameField)
 {
     ui->setupUi(this);
@@ -13,23 +33,10 @@ GameField::GameField(QWidget *parent) :
     this->pointTeam1 = 0;
     this->pointTeam2 = 0;
 
-
-    this->grid = new QGridLayout(this);
-    this->grid->setSpacing(0);
-    this->grid->setMargin(0);
-
-
-    auto *qtcell = new QtCell();
-    //connect(qtcell, SIGNAL(clicked()), this, SLOT(updateField()));
-
-    for(auto row : this->qtField){
-        for(auto cell : row){
-            //connect(cell, SIGNAL(clicked(QMouseEvent*)), this, SLOT(updateField(QMouseEvent*)));
-        }
-    }
-    delete qtcell;
-
-    initField();
+    drawField();
+    Cell c;
+    c.point = 0;
+    Ui::fieldData.cells = std::vector<std::vector<Cell>>(map_y, std::vector<Cell>(map_x, c));
 }
 
 GameField::~GameField()
@@ -37,34 +44,22 @@ GameField::~GameField()
     delete ui;
 }
 
-void GameField::initField()
+void GameField::paintEvent(QPaintEvent *e)
 {
-    for(auto row:this->qtField){
-        for(auto cell : row){
-            this->grid->removeWidget(cell);
-            delete cell;
-        }
-    }
-    this->qtField.clear();
+    QPainter painter(this);
 
+    painter.setPen(Qt::black);
+    painter.setBrush(Qt::black);
 
-    for (auto i = 0; i < map_y ; i++) {
+    for(int i = 0; i <= map_y; i++)
+        painter.drawLine(0, i*CELL_SIZE, map_x*CELL_SIZE, i*CELL_SIZE);
 
-        std::vector<QtCell *> row;
+    for(int i = 0; i <= map_x;i++)
+        painter.drawLine(i*CELL_SIZE, 0, i*CELL_SIZE, map_y*CELL_SIZE);
 
-        for (auto j = 0; j < this->map_x; j++) {
-
-            //とりあえず0で初期化
-            QtCell *cell = new QtCell(0, this);
-            row.push_back(cell);
-            this->grid->addWidget(cell, i, j);
-
-        }
-
-        this->qtField.push_back(row);
-    }
-
-    this->qtField.shrink_to_fit();
+    //端の線を表示するために、10px分増やす
+    this->setMinimumSize(map_x*CELL_SIZE + 10, map_y*CELL_SIZE + 10);
+    this->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 }
 
 void GameField::changeMapSize(int x, int y)
@@ -85,9 +80,9 @@ void GameField::updateField(QMouseEvent *e)
     auto gx = point.x() / cellSize;
     auto gy = point.y() / cellSize;
 
-    if(Ui::phase == Ui::team1_1 || Ui::phase == Ui::team1_2)
-        Ui::fieldData.cells[gx][gy].status = Ui::fieldData.cells[0][0].team1;
-    else
-        Ui::fieldData.cells[gx][gy].status = Ui::fieldData.cells[0][0].team2;
+//    if(Ui::phase == Ui::team1_1 || Ui::phase == Ui::team1_2)
+//        fieldData.cells[gx][gy].status = fieldData.cells[0][0].team1;
+//    else
+//        fieldData.cells[gx][gy].status = fieldData.cells[0][0].team2;
 }
 

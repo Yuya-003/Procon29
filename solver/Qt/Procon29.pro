@@ -28,18 +28,14 @@ INCLUDEPATH += \
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    settingdialog.cpp \
     gamefield.cpp \
-    qtcell.cpp \
     ../src/structure/Field.cpp \
     ../src/structure/Cell.cpp \
 
 
 HEADERS += \
         mainwindow.h \
-    settingdialog.h \
     gamefield.h \
-    qtcell.h \
     ../include/structure/Cell.hpp \
     ../include/structure/Field.hpp \
     ../include/structure/Position.hpp \
@@ -47,9 +43,6 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui \
-    settingdialog.ui \
-    settingdialog.ui \
-    cell.ui \
     gamefield.ui \
 
 QMAKE_CXXFLAGS += /std:c++latest

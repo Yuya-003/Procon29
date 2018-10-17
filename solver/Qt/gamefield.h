@@ -1,43 +1,47 @@
 ﻿#ifndef GAMEFIELD_H
 #define GAMEFIELD_H
 
-#include "qtcell.h"
-
+#include <QtGui>
 #include <QFrame>
 #include <QLabel>
-#include <QGridLayout>
 #include <QMouseEvent>
+#include <QPalette>
+#include <QPainter>
+#include <QSizePolicy>
 
 #include <random>
 #include <vector>
+#include <string>
 #include <structure/Field.hpp>
 
 namespace Ui {
 class GameField;
 
+static Field fieldData = Field();
 }
 
-class GameField : public QFrame
+class GameField : public QWidget
 {
     Q_OBJECT
 
 public:
+    enum{
+       CELL_SIZE = 50,
+    };
+
     explicit GameField(QWidget *parent = nullptr);
     ~GameField();
-
-    using QtField = std::vector<std::vector<QtCell*>>;
 
     int map_x, map_y;
     int turn, pointTeam1, pointTeam2;
 
-    //Qt側のField
-    QtField qtField;
+    inline void mousePressEvent(QMouseEvent *e) override { emit clicked(e); }
+    void paintEvent(QPaintEvent *e) override;
 
-    QGridLayout *grid;
+    void drawField(Field field = Field());
 
-    //structure側のField
-    //Field fieldData;
-
+signals:
+    void clicked(QMouseEvent*);
 
 
 public slots:
@@ -47,11 +51,7 @@ public slots:
 
     void updateField(QMouseEvent *e);
 
-    //void changePoint(int point);
-
-    //void setTeam(QMouseEvent *event);
-
-    void initField();
+    //void updateScore(int point);
 
 private:
     Ui::GameField *ui;

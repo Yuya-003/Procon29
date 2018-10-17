@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QMouseEvent>
 
-#include "settingdialog.h"
 #include "gamefield.h"
 
 namespace Ui {
@@ -22,8 +21,6 @@ public:
     ~MainWindow();
 
 public slots:
-    void openSettingDialog();
-
     void importFromQR();
 
 private:
