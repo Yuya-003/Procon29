@@ -18,6 +18,11 @@ namespace Ui {
 class GameField;
 
 static Field fieldData = Field();
+enum Phase{
+    team1_1, team1_2, team2_1, team2_2
+};
+
+static Phase phase = team1_1;
 }
 
 class GameField : public QWidget
@@ -27,6 +32,8 @@ class GameField : public QWidget
 public:
     enum{
        CELL_SIZE = 50,
+	   FONT_SIZE = 25,
+	   FONT_WIDTH = 1,
     };
 
     explicit GameField(QWidget *parent = nullptr);
@@ -35,13 +42,14 @@ public:
     int map_x, map_y;
     int turn, pointTeam1, pointTeam2;
 
-    inline void mousePressEvent(QMouseEvent *e) override { emit clicked(e); }
-    void paintEvent(QPaintEvent *e) override;
-
     void drawField(Field field = Field());
 
 signals:
+    void clicked(void);
+
     void clicked(QMouseEvent*);
+
+    //void fieldUpdated(void);
 
 
 public slots:
@@ -52,6 +60,11 @@ public slots:
     void updateField(QMouseEvent *e);
 
     //void updateScore(int point);
+
+protected:
+    inline void mousePressEvent(QMouseEvent *e) override{emit clicked(); emit clicked(e);};
+
+    void paintEvent(QPaintEvent *e) override;
 
 private:
     Ui::GameField *ui;
