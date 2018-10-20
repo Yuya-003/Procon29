@@ -13,9 +13,6 @@ GameField::GameField(QWidget *parent) :
     this->pointTeam1 = 0;
     this->pointTeam2 = 0;
 
-    //任意のタイミングで描画を行うために、イベントフィルターをインストール
-    this->installEventFilter(this);
-
     Cell c;
     c.point = 0;
     Ui::fieldData.cells =
@@ -30,27 +27,35 @@ GameField::~GameField()
     delete ui;
 }
 
-void GameField::drawField(Field field)
+
+void GameField::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
 
     painter.setPen(Qt::black);
-    painter.setBrush(Qt::black);
-
     painter.setFont(QFont("Meiryo UI", FONT_SIZE, FONT_WIDTH));
 
     //マス目の色をチームに合わせて表示
     for(int i = 0; i < map_x; i++){
         for(int j = 0;j < map_y; j++){
-
-//            if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].none)
-//                painter.setBrush(QBrush(QColor("#111111")));
+			//いい感じの青色
+            if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].team1)
+                painter.setBrush(QBrush("#0075c2"));
+			//いい感じの赤色
+            else if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].team2)
+                painter.setBrush(QBrush("#ea5549"));
+			//真っ白
+            else
+                painter.setBrush(QBrush("#ffffff"));
 
             int x = i * CELL_SIZE;
             int y = j * CELL_SIZE;
             painter.drawRect(QRect(x,y,CELL_SIZE, CELL_SIZE));
+            painter.fillRect(QRect(x,y,CELL_SIZE, CELL_SIZE), painter.brush());
         }
     }
+
+   painter.setBrush(Qt::black);
 
     //縦線の描画
     for(int i = 0; i <= map_y; i++)
@@ -75,36 +80,6 @@ void GameField::drawField(Field field)
     }
 }
 
-void GameField::paintEvent(QPaintEvent *e)
-{
-    QPainter painter(this);
-
-    painter.setPen(Qt::black);
-    painter.setBrush(Qt::black);
-
-    //縦線の描画
-    for(int i = 0; i <= map_y; i++)
-        painter.drawLine(0, i*CELL_SIZE, map_x*CELL_SIZE, i*CELL_SIZE);
-    //横線の描画
-    for(int i = 0; i <= map_x;i++)
-        painter.drawLine(i*CELL_SIZE, 0, i*CELL_SIZE, map_y*CELL_SIZE);
-
-    //端の線を表示するために、10px分増やす
-    this->setMinimumSize(map_x*CELL_SIZE + 10, map_y*CELL_SIZE + 10);
-    //いい感じにQWidgetのサイズを処理
-    this->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-
-    //得点の表示
-    painter.setFont(QFont("Meiryo UI", FONT_SIZE, FONT_WIDTH));
-    for(int i = 0; i < map_x; i++){
-        for(int j = 0;j < map_y; j++){
-            int x = i * CELL_SIZE + FONT_SIZE * 0.6;  //0.6をかけると、文字が真ん中にくる
-            int y = j * CELL_SIZE + CELL_SIZE - FONT_SIZE / 2;  //2で割ったのを引くと、いい感じになる
-            painter.drawText(x, y, "0");
-        }
-    }
-}
-
 void GameField::changeMapSize(int x, int y)
 {
     this->map_x = x;
@@ -118,19 +93,24 @@ void GameField::changeTurn(int turn)
 
 void GameField::updateField(QMouseEvent *e)
 {
-	QPainter painter(this);
-	painter.begin(this);
-	painter.eraseRect(rect());
+    //phaseの更新を行う
+    if(Ui::phase == Ui::team1_1)
+        Ui::phase = Ui::team1_2;
+    else if(Ui::phase == Ui::team1_2)
+        Ui::phase = Ui::team2_1;
+    else if(Ui::phase == Ui::team2_1)
+        Ui::phase = Ui::team2_2;
+    else
+        Ui::phase = Ui::team1_1;
 
-    auto cellSize = 50;
-    auto point = e->pos();
-    auto gx = point.x() / CELL_SIZE;
-    auto gy = point.y() / CELL_SIZE;
+    //Field情報の更新
+    auto j = e->pos().y() / CELL_SIZE;
+    auto i = e->pos().x() / CELL_SIZE;
 
     if(Ui::phase == Ui::team1_1 || Ui::phase == Ui::team1_2)
-        Ui::fieldData.cells[gx][gy].status = Ui::fieldData.cells[0][0].team1;
+        Ui::fieldData.cells[j][i].status = Ui::fieldData.cells[0][0].team1;
     else
-        Ui::fieldData.cells[gx][gy].status = Ui::fieldData.cells[0][0].team2;
+        Ui::fieldData.cells[j][i].status = Ui::fieldData.cells[0][0].team2;
 
     //再描画
     this->update();
