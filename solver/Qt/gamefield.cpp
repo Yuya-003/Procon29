@@ -40,13 +40,14 @@ void GameField::paintEvent(QPaintEvent *e)
         for(int j = 0;j < map_y; j++){
 			//いい感じの青色
             if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].team1)
-                painter.setBrush(QBrush("#0075c2"));
+                painter.setBrush(QBrush(COLOR_LIGHT_BLUE));
 			//いい感じの赤色
             else if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].team2)
-                painter.setBrush(QBrush("#ea5549"));
+                painter.setBrush(QBrush(COLOR_LIGHT_RED));
 			//真っ白
             else
-                painter.setBrush(QBrush("#ffffff"));
+                painter.setBrush(QBrush(Qt::white));
+
 
             int x = i * CELL_SIZE;
             int y = j * CELL_SIZE;
@@ -54,6 +55,23 @@ void GameField::paintEvent(QPaintEvent *e)
             painter.fillRect(QRect(x,y,CELL_SIZE, CELL_SIZE), painter.brush());
         }
     }
+
+//    //エージェントの位置にellipseを表示
+//    for(int i = 0; i < map_x; i++){
+//        for(int j = 0;j < map_y; j++){
+//            //いい感じの青色
+//            if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].team1)
+//                painter.setBrush(QBrush(COLOR_BLUE));
+//            //いい感じの赤色
+//            else if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].team2)
+//                painter.setBrush(QBrush(COLOR_RED));
+
+//            int x = i * CELL_SIZE;
+//            int y = j * CELL_SIZE;
+//            painter.drawEllipse(QRect(x,y,CELL_SIZE, CELL_SIZE));
+//            //painter.fill(QRect(x,y,CELL_SIZE, CELL_SIZE), painter.brush());
+//        }
+//    }
 
    painter.setBrush(Qt::black);
 
@@ -93,24 +111,38 @@ void GameField::changeTurn(int turn)
 
 void GameField::updateField(QMouseEvent *e)
 {
-    //phaseの更新を行う
-    if(Ui::phase == Ui::team1_1)
-        Ui::phase = Ui::team1_2;
-    else if(Ui::phase == Ui::team1_2)
-        Ui::phase = Ui::team2_1;
-    else if(Ui::phase == Ui::team2_1)
-        Ui::phase = Ui::team2_2;
-    else
-        Ui::phase = Ui::team1_1;
-
-    //Field情報の更新
-    auto j = e->pos().y() / CELL_SIZE;
     auto i = e->pos().x() / CELL_SIZE;
+    auto j = e->pos().y() / CELL_SIZE;
 
-    if(Ui::phase == Ui::team1_1 || Ui::phase == Ui::team1_2)
+    //phaseの更新、エージェントの位置(クリックしたところへ)の更新を行う
+    //敵対するチームのstatusを持つcellをクリックした場合は、位置の更新を行わない
+
+    if(Ui::phase == Ui::team1_1 && Ui::fieldData.cells[j][i].status != Ui::fieldData.cells[j][i].team2){
         Ui::fieldData.cells[j][i].status = Ui::fieldData.cells[0][0].team1;
-    else
+        Ui::phase = Ui::team1_2;
+        Ui::fieldData.team1[0] = Position(i, j);
+    }
+    else if(Ui::phase == Ui::team1_2 && Ui::fieldData.cells[j][i].status != Ui::fieldData.cells[j][i].team2){
+        Ui::fieldData.cells[j][i].status = Ui::fieldData.cells[0][0].team1;
+        Ui::phase = Ui::team2_1;
+        Ui::fieldData.team1[1] = Position(i, j);
+    }
+
+
+    if(Ui::phase == Ui::team2_1 && Ui::fieldData.cells[j][i].status != Ui::fieldData.cells[j][i].team1){
         Ui::fieldData.cells[j][i].status = Ui::fieldData.cells[0][0].team2;
+        Ui::phase = Ui::team2_2;
+        Ui::fieldData.team2[0] = Position(i, j);
+    }
+    else if(Ui::phase == Ui::team2_2 && Ui::fieldData.cells[j][i].status != Ui::fieldData.cells[j][i].team1){
+        Ui::fieldData.cells[j][i].status = Ui::fieldData.cells[0][0].team2;
+        Ui::phase = Ui::team1_1;
+        Ui::fieldData.team2[1] = Position(i, j);
+    }
+    else{ //敵対するチームのcellをクリックした場合の処理
+
+
+    }
 
     //再描画
     this->update();

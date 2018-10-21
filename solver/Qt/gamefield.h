@@ -22,8 +22,7 @@ enum Phase{
     team1_1, team1_2, team2_1, team2_2
 };
 
-//paintEventの実行タイミングが微妙で、team1_1にできない
-static Phase phase = team2_2;
+static Phase phase = team1_1;
 }
 
 class GameField : public QWidget
@@ -31,11 +30,11 @@ class GameField : public QWidget
     Q_OBJECT
 
 public:
-    enum{
-       CELL_SIZE = 50,
-	   FONT_SIZE = 25,
-	   FONT_WIDTH = 1,
-    };
+
+    const int CELL_SIZE = 50;
+    const int FONT_SIZE = 25,  FONT_WIDTH = 1;
+    const QColor COLOR_BLUE = "#0075c2", COLOR_LIGHT_BLUE = "#c6e2ff";
+    const QColor COLOR_RED = "#ea5549",  COLOR_LIGHT_RED = "#ffc6c6";
 
     explicit GameField(QWidget *parent = nullptr);
     ~GameField();
