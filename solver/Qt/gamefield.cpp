@@ -43,12 +43,13 @@ void GameField::paintEvent(QPaintEvent *e)
                 painter.setBrush(QBrush(COLOR_LIGHT_BLUE));
 			//いい感じの赤色
             else if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].team2)
-                painter.setBrush(QBrush(COLOR_LIGHT_RED));
+                painter.setBrush(QBrush(COLOR_LIGHT_ORANGE));
 			//真っ白
             else
                 painter.setBrush(QBrush(Qt::white));
 
 
+            //Rectangleを描画
             int x = i * CELL_SIZE;
             int y = j * CELL_SIZE;
             painter.drawRect(QRect(x,y,CELL_SIZE, CELL_SIZE));
@@ -56,25 +57,19 @@ void GameField::paintEvent(QPaintEvent *e)
         }
     }
 
-//    //エージェントの位置にellipseを表示
-//    for(int i = 0; i < map_x; i++){
-//        for(int j = 0;j < map_y; j++){
-//            //いい感じの青色
-//            if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].team1)
-//                painter.setBrush(QBrush(COLOR_BLUE));
-//            //いい感じの赤色
-//            else if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].team2)
-//                painter.setBrush(QBrush(COLOR_RED));
+    //エージェントの位置にellipseを表示
+    auto tmpTeam = Ui::fieldData.team1;
+    painter.setBrush(QBrush(COLOR_BLUE));
+    painter.drawEllipse(QRect(tmpTeam[0].x*CELL_SIZE, tmpTeam[0].y*CELL_SIZE,CELL_SIZE, CELL_SIZE));
+    painter.drawEllipse(QRect(tmpTeam[1].x*CELL_SIZE, tmpTeam[1].y*CELL_SIZE,CELL_SIZE, CELL_SIZE));
 
-//            int x = i * CELL_SIZE;
-//            int y = j * CELL_SIZE;
-//            painter.drawEllipse(QRect(x,y,CELL_SIZE, CELL_SIZE));
-//            //painter.fill(QRect(x,y,CELL_SIZE, CELL_SIZE), painter.brush());
-//        }
-//    }
+    tmpTeam = Ui::fieldData.team2;
+    painter.setBrush(QBrush(COLOR_ORANGE));
+    painter.drawEllipse(QRect(tmpTeam[0].x*CELL_SIZE, tmpTeam[0].y*CELL_SIZE,CELL_SIZE, CELL_SIZE));
+    painter.drawEllipse(QRect(tmpTeam[1].x*CELL_SIZE, tmpTeam[1].y*CELL_SIZE,CELL_SIZE, CELL_SIZE));
 
-   painter.setBrush(Qt::black);
-
+    //グリッドの描画
+    painter.setBrush(Qt::black);
     //縦線の描画
     for(int i = 0; i <= map_y; i++)
         painter.drawLine(0, i*CELL_SIZE, map_x*CELL_SIZE, i*CELL_SIZE);
@@ -98,16 +93,6 @@ void GameField::paintEvent(QPaintEvent *e)
     }
 }
 
-void GameField::changeMapSize(int x, int y)
-{
-    this->map_x = x;
-    this->map_y = y;
-}
-
-void GameField::changeTurn(int turn)
-{
-    this->turn = turn;
-}
 
 void GameField::updateField(QMouseEvent *e)
 {
@@ -115,8 +100,7 @@ void GameField::updateField(QMouseEvent *e)
     auto j = e->pos().y() / CELL_SIZE;
 
     //phaseの更新、エージェントの位置(クリックしたところへ)の更新を行う
-    //敵対するチームのstatusを持つcellをクリックした場合は、位置の更新を行わない
-
+    //敵対するチームのcellをクリックしていない場合の処理
     if(Ui::phase == Ui::team1_1 && Ui::fieldData.cells[j][i].status != Ui::fieldData.cells[j][i].team2){
         Ui::fieldData.cells[j][i].status = Ui::fieldData.cells[0][0].team1;
         Ui::phase = Ui::team1_2;
@@ -127,9 +111,7 @@ void GameField::updateField(QMouseEvent *e)
         Ui::phase = Ui::team2_1;
         Ui::fieldData.team1[1] = Position(i, j);
     }
-
-
-    if(Ui::phase == Ui::team2_1 && Ui::fieldData.cells[j][i].status != Ui::fieldData.cells[j][i].team1){
+    else if(Ui::phase == Ui::team2_1 && Ui::fieldData.cells[j][i].status != Ui::fieldData.cells[j][i].team1){
         Ui::fieldData.cells[j][i].status = Ui::fieldData.cells[0][0].team2;
         Ui::phase = Ui::team2_2;
         Ui::fieldData.team2[0] = Position(i, j);
@@ -138,12 +120,14 @@ void GameField::updateField(QMouseEvent *e)
         Ui::fieldData.cells[j][i].status = Ui::fieldData.cells[0][0].team2;
         Ui::phase = Ui::team1_1;
         Ui::fieldData.team2[1] = Position(i, j);
+        //ターン変更のシグナル送信
+        emit changedTurn(--turn);
     }
-    else{ //敵対するチームのcellをクリックした場合の処理
+    else{ //敵対するチームのcellをクリックした場合の処理(→相手チームのcellの除去)
 
 
     }
 
-    //再描画
+    //再描画(paintEventの呼び出し)
     this->update();
 }

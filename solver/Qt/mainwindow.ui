@@ -139,13 +139,14 @@
           </property>
           <property name="font">
            <font>
+            <family>Meiryo UI</family>
             <pointsize>16</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">color: rgb(0, 117, 194);</string>
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>team1</string>
@@ -178,7 +179,7 @@
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">color: rgb(234, 85, 73);</string>
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>team2</string>
@@ -216,7 +217,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

@@ -33,8 +33,8 @@ public:
 
     const int CELL_SIZE = 50;
     const int FONT_SIZE = 25,  FONT_WIDTH = 1;
-    const QColor COLOR_BLUE = "#0075c2", COLOR_LIGHT_BLUE = "#c6e2ff";
-    const QColor COLOR_RED = "#ea5549",  COLOR_LIGHT_RED = "#ffc6c6";
+    const QColor COLOR_BLUE = "#1489ff", COLOR_LIGHT_BLUE = "#9eceff";
+    const QColor COLOR_ORANGE = "#ff8914",  COLOR_LIGHT_ORANGE = "#ffce9e";
 
     explicit GameField(QWidget *parent = nullptr);
     ~GameField();
@@ -44,20 +44,17 @@ public:
 
 signals:
     void clicked(void);
-
     void clicked(QMouseEvent*);
+
+    void changedTurn(int turn);
 
 
 public slots:
-    void changeMapSize(int x, int y);
-
-    void changeTurn(int turn);
-
     void updateField(QMouseEvent *e);
 
 protected:
     void mousePressEvent(QMouseEvent *e) override
-		{emit clicked(); emit clicked(e);};
+        {emit clicked(); emit clicked(e);}
 
     void paintEvent(QPaintEvent *e) override;
 
