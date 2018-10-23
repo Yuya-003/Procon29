@@ -91,6 +91,7 @@ void GameField::paintEvent(QPaintEvent *e)
             painter.drawText(x, y, QString::number(Ui::fieldData.cells[j][i].point));
         }
     }
+
 }
 
 
@@ -98,6 +99,9 @@ void GameField::updateField(QMouseEvent *e)
 {
     auto i = e->pos().x() / CELL_SIZE;
     auto j = e->pos().y() / CELL_SIZE;
+
+    //クリックされた場所が範囲外なら、無視
+    if(i >= map_x || j >= map_y) return;
 
     //phaseの更新、エージェントの位置(クリックしたところへ)の更新を行う
     //敵対するチームのcellをクリックしていない場合の処理
@@ -127,6 +131,9 @@ void GameField::updateField(QMouseEvent *e)
 
 
     }
+
+    //マウスのクリックによってfieldの状態が変わった際のシグナル送信
+    emit changedField(Ui::fieldData);
 
     //再描画(paintEventの呼び出し)
     this->update();

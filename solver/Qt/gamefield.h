@@ -47,7 +47,7 @@ signals:
     void clicked(QMouseEvent*);
 
     void changedTurn(int turn);
-
+    void changedField(Field field);
 
 public slots:
     void updateField(QMouseEvent *e);

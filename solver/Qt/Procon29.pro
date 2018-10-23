@@ -31,6 +31,7 @@ SOURCES += \
     gamefield.cpp \
     ../src/structure/Field.cpp \
     ../src/structure/Cell.cpp \
+#    ../QR/QR.cpp
 
 
 HEADERS += \
@@ -39,6 +40,8 @@ HEADERS += \
     ../include/structure/Cell.hpp \
     ../include/structure/Field.hpp \
     ../include/structure/Position.hpp \
+    ../QR/QR.hpp \
+#    ../../../OpenSiv3D(0.3.0)/include/Siv3D.hpp
 
 
 FORMS += \
@@ -46,3 +49,17 @@ FORMS += \
     gamefield.ui \
 
 QMAKE_CXXFLAGS += /std:c++latest
+
+
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/'../../../OpenSiv3D(0.3.0)/lib/Windows(x64)/' -lSiv3D_d
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/'../../../OpenSiv3D(0.3.0)/lib/Windows(x64)/' -lSiv3D_d
+
+#INCLUDEPATH += $$PWD/'../../../OpenSiv3D(0.3.0)/include'
+#DEPENDPATH += $$PWD/'../../../OpenSiv3D(0.3.0)/include'
+#INCLUDEPATH += $$PWD/'../../../OpenSiv3D(0.3.0)/include/ThirdParty'
+#DEPENDPATH += $$PWD/'../../../OpenSiv3D(0.3.0)/include/ThirdParty'
+
+#win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/'../../../OpenSiv3D(0.3.0)/lib/Windows(x64)/libSiv3D_.a'
+#else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/'../../../OpenSiv3D(0.3.0)/lib/Windows(x64)/libSiv3D_d.a'
+#else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/'../../../OpenSiv3D(0.3.0)/lib/Windows(x64)/Siv3D_d.lib'
+#else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/'../../../OpenSiv3D(0.3.0)/lib/Windows(x64)/Siv3D_d.lib'
