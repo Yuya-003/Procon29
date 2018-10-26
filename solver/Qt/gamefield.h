@@ -39,15 +39,20 @@ public:
     explicit GameField(QWidget *parent = nullptr);
     ~GameField();
 
+    bool isPlayerAround(Ui::Phase phase, Position clickedOnGrid);
+
     int map_x, map_y;
     int turn, pointTeam1, pointTeam2;
 
 signals:
+    //emit in mousePressEvent
     void clicked(void);
     void clicked(QMouseEvent*);
 
+    //emit in paintEvent
     void changedTurn(int turn);
     void changedField(Field field);
+    void changedPhase(Ui::Phase);
 
 public slots:
     void updateField(QMouseEvent *e);

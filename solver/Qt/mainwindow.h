@@ -28,6 +28,7 @@ public slots:
     void importFromQR();
     void changeTurn(int turn);
     void changeScore(Field field);
+    void changeStatusBar(Ui::Phase phase);
 
 private:
     Ui::MainWindow *ui;
