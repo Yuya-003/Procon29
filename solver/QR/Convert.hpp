@@ -1,6 +1,22 @@
 #pragma once
-#include "QR.hpp"
+#include <structure/Field.hpp>
 #include <fstream>
+#include <sstream>
+#include <string>
+
+static std::vector<std::string> Split(const std::string & str, char del)
+{
+	std::vector<std::string> subStr;
+	std::stringstream ss(str);
+	std::string item;
+	while (std::getline(ss, item, del)) {
+		if (!item.empty()) {
+			subStr.push_back(item);
+		}
+	}
+
+	return subStr;
+}
 
 static Field GetQRContent()
 {
@@ -20,13 +36,13 @@ static Field GetQRContent()
 	ifs.close();
 
 	//読み取ったテキストを行・列を維持して分割→変換
-	for (const auto tempStr : QRInfo::Split(str, ':')) {
+	for (const auto tempStr : Split(str, ':')) {
 		splitText.push_back(tempStr);
 	}
 
 	for (int i = 0; i < splitText.size(); i++) {
 		std::vector<int> temp;
-		std::vector<std::string> splitStr = QRInfo::Split(splitText[i], ' ');
+		std::vector<std::string> splitStr = Split(splitText[i], ' ');
 
 		for (int j = 0; j < splitStr.size(); j++) {
 			temp.push_back(atoi(splitStr[j].c_str()));

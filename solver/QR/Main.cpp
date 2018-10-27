@@ -1,5 +1,6 @@
 #include "QR.hpp"
 #include <fstream>
+#include "Convert.hpp"
 
 void Main()
 {
@@ -40,7 +41,7 @@ void Main()
 				std::ofstream ofs("./field.txt");
 
 				std::string temp = qrText.narrow();
-				std::vector<std::string> trans = qr.Split(temp, ':');
+				std::vector<std::string> trans = Split(temp, ':');
 
 				for (int i = 0; i < trans.size(); i++) {
 					ofs << trans[i];
