@@ -11,6 +11,10 @@ static Field GetQRContent()
 	std::vector<std::vector<int>> splitValue;
 
 	std::ifstream ifs("./field.txt");
+	if (ifs.fail()) {
+		return Field();
+	}
+
 	std::string str;
 	ifs >> str;
 	ifs.close();
