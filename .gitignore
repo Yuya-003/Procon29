@@ -8,3 +8,4 @@ Qt/*stash
 .vs/
 .vscode/
 Test/
+solver/Qt/field.txt
