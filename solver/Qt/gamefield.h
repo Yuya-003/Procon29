@@ -16,13 +16,6 @@
 
 namespace Ui {
 class GameField;
-
-static Field fieldData = Field();
-enum Phase{
-    team1_1, team1_2, team2_1, team2_2
-};
-
-static Phase phase = team1_1;
 }
 
 class GameField : public QWidget
@@ -34,28 +27,24 @@ public:
     const int CELL_SIZE = 50;
     const int FONT_SIZE = 25,  FONT_WIDTH = 1;
     const QColor COLOR_BLUE = "#1489ff", COLOR_LIGHT_BLUE = "#9eceff";
-    const QColor COLOR_ORANGE = "#ff8914",  COLOR_LIGHT_ORANGE = "#ffce9e";
+    const QColor COLOR_RED = "#ff1414",  COLOR_LIGHT_RED = "#ff7a7a";
 
     explicit GameField(QWidget *parent = nullptr);
     ~GameField();
 
-    bool isPlayerAround(Ui::Phase phase, Position clickedOnGrid);
+    bool isPlayerAround(Position clickedOnGrid);
 
-    int map_x, map_y;
+    size_t mapX(){ return field.rowSize(); }
+    size_t mapY(){ return field.colSize(); }
+
     int turn, pointTeam1, pointTeam2;
+    bool isReadyTurn;
+    Field field;
 
 signals:
     //emit in mousePressEvent
     void clicked(void);
     void clicked(QMouseEvent*);
-
-    //emit in paintEvent
-    void changedTurn(int turn);
-    void changedField(Field field);
-    void changedPhase(Ui::Phase);
-
-public slots:
-    void updateField(QMouseEvent *e);
 
 protected:
     void mousePressEvent(QMouseEvent *e) override

@@ -23,14 +23,21 @@ public:
 
     ~MainWindow();
 
+    const int CELL_SIZE = 50;
+    const int FONT_SIZE = 25,  FONT_WIDTH = 1;
     const QString COLOR_BLUE = "#1489ff", COLOR_LIGHT_BLUE = "#9eceff";
-    const QString COLOR_ORANGE = "#ff8914", COLOR_LIGHT_ORANGE = "#ffce9e";
+    const QString COLOR_RED = "#ff1414", COLOR_LIGHT_RED = "#ff7a7a";
+    bool isReadyTurn;
+
+    bool isPlayerArround(Position player, Position clickedOnGrid);
+
+signals:
+    void changedField(Field field);
 
 public slots:
     void importFromQR();
-    void changeTurn(int turn);
-    void changeScore(Ui::Phase phase);
-    void changeStatusBar(Ui::Phase phase);
+    void updateField(QMouseEvent *e);
+    void changeScore();
 
 private:
     Ui::MainWindow *ui;
