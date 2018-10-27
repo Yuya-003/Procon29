@@ -48,13 +48,15 @@ void Main()
 
 		//ƒJƒƒ‰‚ª~‚Ü‚Á‚Ä‚¢‚È‚©‚Á‚½‚çƒJƒƒ‰‚Ì‰æ‘œ‚ğ•`‰æ
 		if (!qr.isCameraStopped) {
-			texture.fill(image);
-			texture.draw();
+			if (!image.isEmpty()) {
+				texture.fill(image);
+				texture.draw();
 
-			//Enter‚ğ‰Ÿ‚·‚ÆƒJƒƒ‰‚ğ’â~
-			if (KeyEnter.down()) {
-				webcam.stop();
-				qr.isCameraStopped = true;
+				//Enter‚ğ‰Ÿ‚·‚ÆƒJƒƒ‰‚ğ’â~
+				if (KeyEnter.down()) {
+					webcam.stop();
+					qr.isCameraStopped = true;
+				}
 			}
 		}
 
