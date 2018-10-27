@@ -34,9 +34,8 @@ void MainWindow::importFromQR()
     ui->gamefield->map_x = Ui::fieldData.rowSize();
     ui->gamefield->map_y = Ui::fieldData.colSize();
 
-
     //fieldの更新
-    this->ui->gamefield->update();
+    ui->gamefield->update();
     this->update();
 }
 

@@ -71,12 +71,12 @@ void GameField::paintEvent(QPaintEvent *e)
 
     //マス目の色をチームに合わせて表示
     for(int i = 0; i < map_x; i++){
-        for(int j = 0;j < map_y; j++){
+        for(int j = 0; j < map_y; j++){
 			//いい感じの青色
-            if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].team1)
+            if(Ui::fieldData.cells[j][i].status == Cell::team1)
                 painter.setBrush(QBrush(COLOR_LIGHT_BLUE));
 			//いい感じの赤色
-            else if(Ui::fieldData.cells[j][i].status == Ui::fieldData.cells[j][i].team2)
+            else if(Ui::fieldData.cells[j][i].status == Cell::team2)
                 painter.setBrush(QBrush(COLOR_LIGHT_ORANGE));
 			//真っ白
             else
@@ -140,26 +140,26 @@ void GameField::updateField(QMouseEvent *e)
     //phaseの更新、エージェントの位置(クリックしたところへ)の更新を行う
     //敵対するチームのcellをクリックしていない場合の処理
     if(isPlayerAround(Ui::phase, Position(_x,_y))){
-        if(Ui::phase == Ui::team1_1 && Ui::fieldData.cells[_y][_x].status != Ui::fieldData.cells[_y][_x].team2){
-            Ui::fieldData.cells[_y][_x].status = Ui::fieldData.cells[0][0].team1;
+        if(Ui::phase == Ui::team1_1 && Ui::fieldData.cells[_y][_x].status != Cell::team2){
+            Ui::fieldData.cells[_y][_x].status = Cell::team1;
             Ui::phase = Ui::team1_2;
             emit changedPhase(Ui::phase);
             Ui::fieldData.team1[0] = Position(_x, _y);
         }
-        else if(Ui::phase == Ui::team1_2 && Ui::fieldData.cells[_y][_x].status != Ui::fieldData.cells[_y][_x].team2){
-            Ui::fieldData.cells[_y][_x].status = Ui::fieldData.cells[0][0].team1;
+        else if(Ui::phase == Ui::team1_2 && Ui::fieldData.cells[_y][_x].status != Cell::team2){
+            Ui::fieldData.cells[_y][_x].status = Cell::team1;
             Ui::phase = Ui::team2_1;
             emit changedPhase(Ui::phase);
             Ui::fieldData.team1[1] = Position(_x, _y);
         }
-        else if(Ui::phase == Ui::team2_1 && Ui::fieldData.cells[_y][_x].status != Ui::fieldData.cells[_y][_x].team1){
-            Ui::fieldData.cells[_y][_x].status = Ui::fieldData.cells[0][0].team2;
+        else if(Ui::phase == Ui::team2_1 && Ui::fieldData.cells[_y][_x].status != Cell::team1){
+            Ui::fieldData.cells[_y][_x].status = Cell::team2;
             Ui::phase = Ui::team2_2;
             emit changedPhase(Ui::phase);
             Ui::fieldData.team2[0] = Position(_x, _y);
         }
-        else if(Ui::phase == Ui::team2_2 && Ui::fieldData.cells[_y][_x].status != Ui::fieldData.cells[_y][_x].team1){
-            Ui::fieldData.cells[_y][_x].status = Ui::fieldData.cells[0][0].team2;
+        else if(Ui::phase == Ui::team2_2 && Ui::fieldData.cells[_y][_x].status != Cell::team1){
+            Ui::fieldData.cells[_y][_x].status = Cell::team2;
             Ui::phase = Ui::team1_1;
             emit changedPhase(Ui::phase);
             Ui::fieldData.team2[1] = Position(_x, _y);
