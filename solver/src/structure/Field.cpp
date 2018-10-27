@@ -1,4 +1,4 @@
-#include <structure/Field.hpp>
+﻿#include <structure/Field.hpp>
 
 Field::Field(size_t h, size_t w)
 {
