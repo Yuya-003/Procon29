@@ -44,11 +44,9 @@ void Main()
 
 				ofs.close();
 			}
-		}
 
-		//ƒJƒƒ‰‚ª~‚Ü‚Á‚Ä‚¢‚È‚©‚Á‚½‚çƒJƒƒ‰‚Ì‰æ‘œ‚ğ•`‰æ
-		if (!qr.isCameraStopped) {
-			if (!image.isEmpty()) {
+			//ƒJƒƒ‰‚ª~‚Ü‚Á‚Ä‚¢‚È‚©‚Á‚½‚çƒJƒƒ‰‚Ì‰æ‘œ‚ğ•`‰æ
+			if (!qr.isCameraStopped) {
 				texture.fill(image);
 				texture.draw();
 
@@ -57,6 +55,7 @@ void Main()
 					webcam.stop();
 					qr.isCameraStopped = true;
 				}
+
 			}
 		}
 
