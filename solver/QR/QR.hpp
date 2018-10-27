@@ -19,5 +19,5 @@ public:
 	void SetString();
 
 	//std::string‚ðField‚É•ÏŠ·‚µ‚ÄŽó‚¯“n‚µ
-	static Field GetQRContent();
+	//static Field GetQRContent();
 };
