@@ -1,5 +1,3 @@
-QR/Procon_QR.sln
-*.vcxproj
 *.filters
 *.user
 QR/.vs/*
@@ -8,4 +6,3 @@ QR/Intermediate/*
 .vs/
 .vscode/
 Test/
-origin/structure
