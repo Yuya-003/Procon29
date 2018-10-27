@@ -26,7 +26,7 @@ static Field GetQRContent()
 	std::vector<std::string> splitText;
 	std::vector<std::vector<int>> splitValue;
 
-	std::ifstream ifs("./field.txt");
+	std::ifstream ifs("../../QR/App/field.txt");
 	if (ifs.fail()) {
 		return Field();
 	}
