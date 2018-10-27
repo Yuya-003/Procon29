@@ -13,7 +13,7 @@ public:
 	QRContent content;
 	static bool isCameraStopped;
 
-	static std::vector<std::string> Split(const std::string &str, char del);
+	//static std::vector<std::string> Split(const std::string &str, char del);
 
 	//読みとったテキストをstd::stringに変換
 	void SetString();
