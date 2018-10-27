@@ -38,15 +38,9 @@ void Main()
 				qrText = qr.content.text;
 				qr.SetString();
 
-				std::ofstream ofs("./field.txt");
+				std::ofstream ofs("../../Qt/field.txt");
 
-				std::string temp = qrText.narrow();
-				std::vector<std::string> trans = Split(temp, ':');
-
-				for (int i = 0; i < trans.size(); i++) {
-					ofs << trans[i];
-					ofs << "\n";
-				}
+				ofs << qrText.narrow();
 
 				ofs.close();
 			}

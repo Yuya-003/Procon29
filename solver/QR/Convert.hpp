@@ -26,14 +26,14 @@ static Field GetQRContent()
 	std::vector<std::string> splitText;
 	std::vector<std::vector<int>> splitValue;
 
-	std::ifstream ifs("../../QR/App/field.txt");
+	std::ifstream ifs("field.txt");
 	if (ifs.fail()) {
 		return Field();
 	}
 
-	std::string str;
-	ifs >> str;
-	ifs.close();
+	char a[4000];
+	ifs.getline(a, 4000);
+	std::string str(a);
 
 	//読み取ったテキストを行・列を維持して分割→変換
 	for (const auto tempStr : Split(str, ':')) {
@@ -54,8 +54,8 @@ static Field GetQRContent()
 	//変換した値のうち行,列,プレイヤーのいる場所を別変数に代入
 	h = splitValue[0][0];
 	w = splitValue[0][1];
-	firstPlace[0] = { splitValue[h + 1][0] - 1 ,splitValue[h + 1][1] - 1 };
-	firstPlace[1] = { splitValue[h + 2][0] - 1 ,splitValue[h + 2][1] - 1 };
+	firstPlace[0] = Position(splitValue[h + 1][0] - 1 ,splitValue[h + 1][1] - 1 );
+	firstPlace[1] = Position(splitValue[h + 2][0] - 1 ,splitValue[h + 2][1] - 1 );
 
 	//Fieldへ代入
 	for (unsigned int i = 0; i < h; i++) {
@@ -73,10 +73,10 @@ static Field GetQRContent()
 	}
 
 	//プレイヤーのいる場所を保存
-	field.team1[0] = { firstPlace[0].x + 1,firstPlace[0].y + 1 };
-	field.team2[1] = { firstPlace[0].x + 1,firstPlace[1].y + 1 };
-	field.team2[0] = { firstPlace[1].x + 1,firstPlace[0].y + 1 };
-	field.team1[1] = { firstPlace[1].x + 1,firstPlace[1].y + 1 };
+	field.team1[0] = Position( firstPlace[0].x + 1,firstPlace[0].y + 1 );
+	field.team2[1] = Position( firstPlace[0].x + 1,firstPlace[1].y + 1 );
+	field.team2[0] = Position( firstPlace[1].x + 1,firstPlace[0].y + 1 );
+	field.team1[1] = Position( firstPlace[1].x + 1,firstPlace[1].y + 1 );
 
 	//プレイヤーのいる場所のステータスを変更
 	field.cells[firstPlace[0].x][firstPlace[0].y].status = Cell::team1;
