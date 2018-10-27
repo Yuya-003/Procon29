@@ -11,7 +11,7 @@ GameField::GameField(QWidget *parent) :
     this->map_y = 8;
     this->pointTeam1 = 0;
     this->pointTeam2 = 0;
-    this->turn = 60;
+    this->turn = 0;
 
 
     connect(this, SIGNAL(clicked(QMouseEvent*)), this, SLOT(updateField(QMouseEvent*)));
@@ -164,7 +164,7 @@ void GameField::updateField(QMouseEvent *e)
             emit changedPhase(Ui::phase);
             Ui::fieldData.team2[1] = Position(_x, _y);
             //ターン変更のシグナル送信
-            emit changedTurn(--turn);
+            emit changedTurn(++turn);
         }
         //敵対するチームのcellをクリックした場合の処理(→相手チームのcellの除去)
         else if(isPlayerAround(Ui::phase, Position(_x, _y))){

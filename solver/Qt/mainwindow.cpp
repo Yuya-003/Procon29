@@ -29,14 +29,11 @@ MainWindow::~MainWindow()
 void MainWindow::importFromQR()
 {
     //QRコードからデータを受け取る
-    Ui::fieldData = Field();
-    Cell c;
-    c.point = 1;
+    Ui::fieldData = GetQRContent();
 
-    Ui::fieldData.cells = std::vector<std::vector<Cell>>(4, std::vector<Cell>(5, c));
+    ui->gamefield->map_x = Ui::fieldData.rowSize();
+    ui->gamefield->map_y = Ui::fieldData.colSize();
 
-    ui->gamefield->map_x = Ui::fieldData.cells[0].size();
-    ui->gamefield->map_y = Ui::fieldData.cells.size();
 
     //fieldの更新
     this->ui->gamefield->update();
@@ -49,10 +46,10 @@ void MainWindow::changeTurn(int turn)
     update();
 }
 
-void MainWindow::changeScore(Field field)
+void MainWindow::changeScore(Ui::Phase)
 {
-    ui->label_pointTeam1->setText(QString::number(field.calcScore(Cell::team1)));
-    ui->label_pointTeam2->setText(QString::number(field.calcScore(Cell::team2)));
+    ui->label_pointTeam1->setText(QString::number(Ui::fieldData.calcScore(Cell::team1)));
+    ui->label_pointTeam2->setText(QString::number(Ui::fieldData.calcScore(Cell::team2)));
 }
 
 void MainWindow::changeStatusBar(Ui::Phase phase)

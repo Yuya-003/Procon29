@@ -24,6 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += \
     ../include/ \
+    ../QR/ \
 
 SOURCES += \
         main.cpp \
@@ -40,7 +41,7 @@ HEADERS += \
     ../include/structure/Cell.hpp \
     ../include/structure/Field.hpp \
     ../include/structure/Position.hpp \
-    ../QR/QR.hpp \
+    ../QR/Convert.hpp \
 #    ../../../OpenSiv3D(0.3.0)/include/Siv3D.hpp
 
 

@@ -5,6 +5,8 @@
 #include <QMouseEvent>
 #include <QPalette>
 
+#include <Convert.hpp>
+
 #include "gamefield.h"
 
 namespace Ui {
@@ -27,7 +29,7 @@ public:
 public slots:
     void importFromQR();
     void changeTurn(int turn);
-    void changeScore(Field field);
+    void changeScore(Ui::Phase phase);
     void changeStatusBar(Ui::Phase phase);
 
 private:
