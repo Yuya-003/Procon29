@@ -1,55 +1,22 @@
 #include "QR.hpp"
 
-void Main()
+std::string QRInfo::qrText = "";
+bool QRInfo::isCameraStopped = false;
+
+std::vector<std::string> QRInfo::Split(const std::string & str, char del)
 {
-	Webcam webcam(0);
-	Image image;
-	DynamicTexture texture;
-	QRDecoder qrDecoder;
-	QRInfo qr;
-	String qrText = U"No text.";
-
-	//ウィンドウサイズのリサイズ
-	Window::Resize(1280, 720);
-
-	//カメラの起動
-	webcam.setResolution(1280, 720);
-	webcam.start();
-
-	while (System::Update())
-	{
-		//描画されていたものを全て消去
-		ClearPrint();
-
-		if (webcam.hasNewFrame())
-		{
-			webcam.getFrame(image);
-
-			//QRコードをデコード
-			qrDecoder.decode(image, qr.content);
-			//QRコードに赤枠を付与
-			qr.content.quad.overwriteFrame(image, 6, Palette::Red);
-			
-			if (qr.content.text)
-			{
-				qrText = qr.content.text;
-				qr.SetString();
-			}
+	std::vector<std::string> subStr;
+	std::stringstream ss(str);
+	std::string item;
+	while (std::getline(ss, item, del)) {
+		if (!item.empty()) {
+			subStr.push_back(item);
 		}
-
-		//カメラが止まっていなかったらカメラの画像を描画
-		if (!qr.isCameraStopped) {
-			texture.fill(image);
-			texture.draw();
-
-			//Enterを押すとカメラを停止
-			if (KeyEnter.down()) {
-				webcam.stop();
-				qr.isCameraStopped = true;
-			}
-		}
-
-		//読み取ったテキストを表示
-		Print << qrText;
 	}
+
+	return subStr;
+}
+
+void QRInfo::SetString() {
+	qrText = content.text.narrow();
 }
