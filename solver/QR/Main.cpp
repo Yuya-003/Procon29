@@ -1,4 +1,4 @@
-#include "QR.hpp"
+ï»¿#include "QR.hpp"
 #include <fstream>
 #include "Convert.hpp"
 
@@ -12,29 +12,26 @@ void Main()
 	String qrText = U"No text.";
 	Field field;
 
-	//ƒEƒBƒ“ƒhƒEƒTƒCƒY‚ÌƒŠƒTƒCƒY
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã®ãƒªã‚µã‚¤ã‚º
 	Window::Resize(1280, 720);
 
-	//ƒJƒƒ‰‚Ì‹N“®
+	//ã‚«ãƒ¡ãƒ©ã®èµ·å‹•
 	webcam.setResolution(1280, 720);
 	webcam.start();
 
 	while (System::Update())
 	{
-		//•`‰æ‚³‚ê‚Ä‚¢‚½‚à‚Ì‚ğ‘S‚ÄÁ‹
+		//æç”»ã•ã‚Œã¦ã„ãŸã‚‚ã®ã‚’å…¨ã¦æ¶ˆå»
 		ClearPrint();
-
-		if (webcam.hasNewFrame())
+		
+		//ã‚«ãƒ¡ãƒ©ãŒ1ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å–å¾—å‡ºæ¥ãŸã‚‰
+		if(webcam.getFrame(image))
 		{
-			webcam.getFrame(image);
+			//QRã‚³ãƒ¼ãƒ‰ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰
+			if (qrDecoder.decode(image, qr.content) && qr.content.text) {
+				//QRã‚³ãƒ¼ãƒ‰ã«èµ¤æ ã‚’ä»˜ä¸
+				qr.content.quad.overwriteFrame(image, 6, Palette::Red);
 
-			//QRƒR[ƒh‚ğƒfƒR[ƒh
-			qrDecoder.decode(image, qr.content);
-			//QRƒR[ƒh‚ÉÔ˜g‚ğ•t—^
-			qr.content.quad.overwriteFrame(image, 6, Palette::Red);
-
-			if (qr.content.text)
-			{
 				qrText = qr.content.text;
 				qr.SetString();
 
@@ -45,21 +42,21 @@ void Main()
 				ofs.close();
 			}
 
-			//ƒJƒƒ‰‚ª~‚Ü‚Á‚Ä‚¢‚È‚©‚Á‚½‚çƒJƒƒ‰‚Ì‰æ‘œ‚ğ•`‰æ
-			if (!qr.isCameraStopped) {
+			//ã‚«ãƒ¡ãƒ©ãŒæ­¢ã¾ã£ã¦ã„ãªã‹ã£ãŸã‚‰ã‚«ãƒ¡ãƒ©ã®ç”»åƒã‚’æç”»
+			//if (!qr.isCameraStopped) {
 				texture.fill(image);
 				texture.draw();
 
-				//Enter‚ğ‰Ÿ‚·‚ÆƒJƒƒ‰‚ğ’â~
+				//Enterã‚’æŠ¼ã™ã¨ã‚«ãƒ¡ãƒ©ã‚’åœæ­¢
 				if (KeyEnter.down()) {
 					webcam.stop();
 					qr.isCameraStopped = true;
 				}
 
-			}
+			//}
 		}
 
-		//“Ç‚İæ‚Á‚½ƒeƒLƒXƒg‚ğ•\¦
+		//èª­ã¿å–ã£ãŸãƒ†ã‚­ã‚¹ãƒˆã‚’è¡¨ç¤º
 		Print << qrText;
 	}
 }
