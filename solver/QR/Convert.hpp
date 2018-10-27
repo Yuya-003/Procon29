@@ -26,7 +26,7 @@ static Field GetQRContent()
 	std::vector<std::string> splitText;
 	std::vector<std::vector<int>> splitValue;
 
-	std::ifstream ifs("field.txt");
+	std::ifstream ifs("../field.txt");
 	if (ifs.fail()) {
 		return Field();
 	}
@@ -35,7 +35,7 @@ static Field GetQRContent()
 	ifs.getline(a, 4000);
 	std::string str(a);
 
-	//“Ç‚İæ‚Á‚½ƒeƒLƒXƒg‚ğsE—ñ‚ğˆÛ‚µ‚Ä•ªŠ„¨•ÏŠ·
+	//ï¿½Ç‚İï¿½ï¿½ï¿½ï¿½ï¿½eï¿½Lï¿½Xï¿½gï¿½ï¿½sï¿½Eï¿½ï¿½ï¿½Ûï¿½ï¿½ï¿½ï¿½Ä•ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏŠï¿½
 	for (const auto tempStr : Split(str, ':')) {
 		splitText.push_back(tempStr);
 	}
@@ -51,13 +51,13 @@ static Field GetQRContent()
 		splitValue.push_back(temp);
 	}
 
-	//•ÏŠ·‚µ‚½’l‚Ì‚¤‚¿s,—ñ,ƒvƒŒƒCƒ„[‚Ì‚¢‚éêŠ‚ğ•Ê•Ï”‚É‘ã“ü
+	//ï¿½ÏŠï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½Ì‚ï¿½ï¿½ï¿½ï¿½s,ï¿½ï¿½,ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ì‚ï¿½ï¿½ï¿½êŠï¿½ï¿½Ê•Ïï¿½ï¿½É‘ï¿½ï¿½
 	h = splitValue[0][0];
 	w = splitValue[0][1];
 	firstPlace[0] = Position(splitValue[h + 1][0] - 1 ,splitValue[h + 1][1] - 1 );
 	firstPlace[1] = Position(splitValue[h + 2][0] - 1 ,splitValue[h + 2][1] - 1 );
 
-	//Field‚Ö‘ã“ü
+	//Fieldï¿½Ö‘ï¿½ï¿½
 	for (unsigned int i = 0; i < h; i++) {
 		std::vector<Cell> cellArray;
 
@@ -72,13 +72,13 @@ static Field GetQRContent()
 		field.cells.push_back(cellArray);
 	}
 
-	//ƒvƒŒƒCƒ„[‚Ì‚¢‚éêŠ‚ğ•Û‘¶
+	//ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ì‚ï¿½ï¿½ï¿½êŠï¿½ï¿½Û‘ï¿½
 	field.team1[0] = Position( firstPlace[0].x + 1,firstPlace[0].y + 1 );
 	field.team2[1] = Position( firstPlace[0].x + 1,firstPlace[1].y + 1 );
 	field.team2[0] = Position( firstPlace[1].x + 1,firstPlace[0].y + 1 );
 	field.team1[1] = Position( firstPlace[1].x + 1,firstPlace[1].y + 1 );
 
-	//ƒvƒŒƒCƒ„[‚Ì‚¢‚éêŠ‚ÌƒXƒe[ƒ^ƒX‚ğ•ÏX
+	//ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ì‚ï¿½ï¿½ï¿½êŠï¿½ÌƒXï¿½eï¿½[ï¿½^ï¿½Xï¿½ï¿½ÏX
 	field.cells[firstPlace[0].x][firstPlace[0].y].status = Cell::team1;
 	field.cells[firstPlace[0].x][firstPlace[1].y].status = Cell::team2;
 	field.cells[firstPlace[1].x][firstPlace[0].y].status = Cell::team2;
