@@ -35,7 +35,7 @@ void Main()
 				qrText = qr.content.text;
 				qr.SetString();
 
-				std::ofstream ofs("../../Qt/field.txt");
+				std::ofstream ofs("../../field.txt");
 
 				ofs << qrText.narrow();
 
