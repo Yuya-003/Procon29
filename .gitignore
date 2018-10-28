@@ -12,3 +12,4 @@ Qt/*stash
 .vscode/
 Test/
 solver/Qt/field.txt
+solver/build*
