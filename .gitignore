@@ -1,3 +1,14 @@
 .vs/
 .vscode/
 Test/
+Qt/Procon29.pro.user
+Qt/build*
+*autosave
+Qt/*vcx*
+Qt/GeneratedFiles/*
+Qt/*sln
+Qt/*stash
+.vs/
+.vscode/
+Test/
+solver/Qt/field.txt

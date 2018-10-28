@@ -1,0 +1,10 @@
+*.user
+debug/*
+GeneratedFiles/*
+release/*
+x64/*
+*.sln
+*.vcx*
+build*/*
+.vs/*
+*.stash
